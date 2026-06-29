@@ -1,0 +1,1971 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ISC2 CC — Certified in Cybersecurity Study Guide</title>
+<style>
+  :root{
+    --header:#0f172a;
+    --accent:#2563eb;
+    --light:#f8fafc;
+    --border:#e2e8f0;
+    --muted:#64748b;
+    --success:#16a34a;
+    --danger:#dc2626;
+    --warning:#d97706;
+  }
+  *{box-sizing:border-box;}
+  body{
+    font-family:'Segoe UI', system-ui, -apple-system, sans-serif;
+    margin:0;
+    background:#eef2f6;
+    color:var(--header);
+  }
+  #app{
+    max-width:900px;
+    margin:0 auto;
+    padding:0 0 40px;
+    background:#fff;
+    min-height:100vh;
+  }
+  .header{
+    background:var(--header);
+    color:#fff;
+    padding:20px 24px;
+    border-radius:0 0 12px 12px;
+  }
+  .header-title{font-size:22px;font-weight:700;margin-bottom:2px;}
+  .header-sub{font-size:14px;color:rgba(255,255,255,0.7);margin-bottom:16px;}
+  .nav{display:flex;gap:12px;align-items:center;flex-wrap:wrap;}
+  .nav-btn{
+    background:transparent;color:rgba(255,255,255,0.7);
+    border:1px solid rgba(255,255,255,0.2);
+    padding:6px 16px;border-radius:20px;cursor:pointer;font-size:14px;
+    font-family:inherit;
+  }
+  .nav-btn.active{background:#2563eb;color:#fff;border:none;}
+  .content{padding:20px 16px;}
+  .stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:20px;}
+  .stat-card{background:#f8fafc;border-radius:10px;padding:14px 16px;border:1px solid var(--border);}
+  .stat-label{font-size:11px;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.05em;}
+  .stat-value{font-size:24px;font-weight:700;}
+  .section-title{font-weight:600;font-size:15px;margin-bottom:12px;color:var(--header);}
+  .domain-card{
+    border-radius:12px;padding:16px 20px;cursor:pointer;
+    display:flex;align-items:center;gap:12px;margin-bottom:10px;
+    border:1px solid;
+  }
+  .domain-icon{font-size:28px;}
+  .domain-name{font-weight:600;font-size:15px;}
+  .domain-meta{font-size:13px;color:var(--muted);margin-top:2px;}
+  .domain-progress-row{margin-top:6px;display:flex;align-items:center;gap:8px;}
+  .progress-track{flex:1;background:#e2e8f0;border-radius:4px;height:4px;}
+  .progress-fill{height:4px;border-radius:4px;}
+  .domain-chevron{font-size:20px;}
+  .card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px 24px;margin-bottom:16px;}
+  .tips-card{background:#fefce8;border-color:#fef08a;}
+  .tips-title{font-weight:600;margin-bottom:8px;color:#713f12;}
+  .tips-body{font-size:13px;color:#78350f;line-height:1.7;}
+  .btn{
+    padding:8px 18px;border-radius:8px;cursor:pointer;font-size:14px;font-weight:500;
+    font-family:inherit;border:none;
+  }
+  .btn-primary{background:var(--accent);color:#fff;}
+  .btn-primary:disabled{opacity:0.6;cursor:default;}
+  .btn-outline{background:transparent;color:var(--accent);border:1px solid var(--accent);}
+  .btn-success{background:var(--success);color:#fff;}
+  .btn-danger{background:var(--danger);color:#fff;}
+  .btn-ghost{background:#f1f5f9;color:var(--header);}
+  .badge{font-size:12px;font-weight:500;padding:2px 10px;border-radius:20px;display:inline-block;}
+  .option-btn{
+    width:100%;text-align:left;padding:12px 16px;border-radius:8px;cursor:pointer;
+    margin-bottom:8px;font-size:14px;transition:all 0.15s;border:1px solid var(--border);
+    background:#f8fafc;color:var(--header);font-family:inherit;display:block;
+  }
+  .option-btn .opt-letter{font-weight:600;margin-right:10px;}
+  .option-btn.state-correct{background:#dcfce7;border-color:var(--success);color:#14532d;}
+  .option-btn.state-wrong{background:#fee2e2;border-color:var(--danger);color:#7f1d1d;}
+  .option-btn.state-selected{background:#eff6ff;border-color:var(--accent);color:var(--header);}
+  .option-btn.state-disabled{cursor:default;}
+  .explanation-box{
+    background:#f0f9ff;border-radius:8px;padding:12px 16px;margin-top:8px;
+    font-size:13px;color:#0c4a6e;line-height:1.6;
+  }
+  .domain-header{padding:16px 24px;border-radius:0 0 12px 12px;}
+  .domain-header-top{display:flex;align-items:center;gap:12px;margin-bottom:12px;flex-wrap:wrap;}
+  .back-btn{
+    background:rgba(255,255,255,0.2);color:#fff;border:none;padding:5px 14px;
+    border-radius:20px;cursor:pointer;font-size:13px;font-family:inherit;
+  }
+  .domain-header-icon{font-size:20px;}
+  .domain-header-title{color:#fff;font-weight:600;font-size:16px;}
+  .domain-header-weight{background:rgba(255,255,255,0.25);color:#fff;font-size:12px;padding:2px 10px;border-radius:20px;}
+  .toggle-row{display:flex;gap:8px;}
+  .toggle-btn{
+    padding:6px 16px;border-radius:20px;cursor:pointer;font-size:14px;font-family:inherit;
+    border:1px solid rgba(255,255,255,0.2);background:transparent;color:rgba(255,255,255,0.7);
+  }
+  .toggle-btn.active{background:#2563eb;color:#fff;border:none;}
+  .topic-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:16px;}
+  .topic-tab{font-size:13px;padding:8px 18px;border-radius:8px;cursor:pointer;font-family:inherit;border:none;background:#f1f5f9;color:var(--header);}
+  .topic-tab.active{background:var(--accent);color:#fff;}
+  .topic-title{font-weight:600;font-size:16px;margin-bottom:16px;}
+  .content-line-heading{font-weight:700;margin-top:12px;margin-bottom:4px;font-size:15px;color:var(--header);}
+  .content-line{font-size:14px;line-height:1.7;color:#334155;}
+  .content-spacer{height:8px;}
+  .ai-section{margin-top:12px;}
+  .ai-section-title{font-weight:600;margin-bottom:8px;}
+  .ai-loading-text{color:var(--muted);font-size:13px;margin-top:8px;}
+  .ai-error-text{color:var(--danger);font-size:13px;margin-top:8px;}
+  .ai-question-card{margin-top:12px;}
+  .ai-question-text{font-weight:600;margin-top:10px;margin-bottom:16px;font-size:15px;line-height:1.5;}
+  .quiz-top-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:10px;}
+  .quiz-counter{font-weight:600;}
+  .dots-row{display:flex;gap:6px;flex-wrap:wrap;}
+  .dot{width:10px;height:10px;border-radius:50%;cursor:pointer;border:none;padding:0;background:var(--border);}
+  .dot.correct{background:var(--success);}
+  .dot.wrong{background:var(--danger);}
+  .dot.current{outline:2px solid #0000;box-shadow:0 0 0 2px var(--header);}
+  .question-text{font-weight:600;font-size:15px;line-height:1.6;margin-bottom:20px;}
+  .quiz-nav-row{display:flex;justify-content:space-between;margin-top:16px;}
+  .progress-bar-outer{background:#f1f5f9;border-radius:6px;height:6px;margin-bottom:20px;}
+  .progress-bar-inner{background:var(--accent);height:6px;border-radius:6px;transition:width 0.3s;}
+  .result-card{text-align:center;}
+  .result-emoji{font-size:64px;margin-bottom:8px;}
+  .result-pct{font-size:36px;font-weight:700;}
+  .result-status{font-size:20px;font-weight:600;color:var(--header);margin:8px 0;}
+  .result-sub{color:var(--muted);margin-bottom:16px;}
+  .result-actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;}
+  .review-row{display:flex;justify-content:space-between;margin-bottom:8px;flex-wrap:wrap;gap:8px;}
+  .review-q{font-weight:500;margin-bottom:8px;font-size:14px;}
+  .review-correct{font-size:13px;color:#166534;background:#f0fdf4;border-radius:6px;padding:8px 12px;}
+  .review-wrong{font-size:13px;color:#991b1b;background:#fef2f2;border-radius:6px;padding:8px 12px;margin-top:6px;}
+  .review-explain{font-size:12px;color:var(--muted);margin-top:8px;line-height:1.5;}
+  strong{font-weight:700;}
+  @media (max-width:480px){
+    .stats-grid{grid-template-columns:repeat(3,1fr);gap:8px;}
+    .stat-value{font-size:18px;}
+    .header{padding:16px;}
+    .card{padding:16px;}
+  }
+</style>
+</head>
+<body>
+<div id="app"></div>
+
+<script>
+// ============== DATA ==============
+const domains = [
+  {
+    id: 1,
+    title: "Security Principles",
+    weight: "26%",
+    icon: "🛡️",
+    color: "#1a5c9e",
+    bg: "#e8f0fb",
+    topics: [
+      {
+        name: "CIA Triad",
+        content: `The CIA Triad is the foundation of information security:
+
+**Confidentiality** – Protecting information from unauthorized disclosure. Controls include encryption, access controls, data classification, and need-to-know principles.
+
+**Integrity** – Ensuring data is accurate, complete, and has not been altered without authorization. Controls include hashing, digital signatures, version control, and audit logs.
+
+**Availability** – Ensuring authorized users can access systems and data when needed. Controls include redundancy, failover, backups, and disaster recovery plans.
+
+**Non-repudiation** – A related concept ensuring that a party cannot deny sending a message or performing an action. Achieved through digital signatures and audit logs.`
+      },
+      {
+        name: "Authentication, Authorization & Access Control",
+        content: `**Authentication** – Verifying the identity of a user or system. Factors:
+- Something you know (password, PIN)
+- Something you have (smart card, token)
+- Something you are (biometrics)
+- Multi-Factor Authentication (MFA) uses 2+ factors.
+
+**Authorization** – What an authenticated user is permitted to do. Models include:
+- DAC (Discretionary Access Control) – owner controls access
+- MAC (Mandatory Access Control) – labels and clearances
+- RBAC (Role-Based Access Control) – permissions tied to job roles
+- ABAC (Attribute-Based Access Control) – context-aware rules
+
+**Principle of Least Privilege** – Users should have only the minimum access needed.
+**Separation of Duties** – No single person has control over an entire critical process.`
+      },
+      {
+        name: "Privacy & Data Protection",
+        content: `**PII (Personally Identifiable Information)** – Any data that can identify a specific individual.
+**PHI (Protected Health Information)** – Health-related PII under regulations like HIPAA.
+**GDPR** – EU regulation requiring consent, data minimization, right to erasure, breach notification within 72 hours.
+
+**Data Lifecycle**: Creation → Storage → Use → Sharing → Archival → Destruction
+- Data at rest: encrypted on disk
+- Data in transit: encrypted over network (TLS)
+- Data in use: hardest to protect
+
+**Data Classification** (government): Top Secret > Secret > Confidential > Unclassified
+**Data Classification** (commercial): Confidential > Private > Sensitive > Public`
+      },
+      {
+        name: "Risk Management",
+        content: `**Risk** = Threat × Vulnerability × Asset Value
+
+**Risk Terminology:**
+- **Threat** – Potential cause of an unwanted incident
+- **Vulnerability** – Weakness that can be exploited
+- **Risk** – Likelihood × Impact
+- **Control/Safeguard** – Measure to reduce risk
+
+**Risk Treatment Options (TAME):**
+- **Transfer** – Shift risk to another party (insurance)
+- **Accept** – Acknowledge and tolerate the risk
+- **Mitigate** – Reduce likelihood or impact
+- **Evade/Avoid** – Eliminate the risk by stopping the activity
+
+**Quantitative Risk Analysis:** ALE = SLE × ARO
+- SLE (Single Loss Expectancy) = Asset Value × Exposure Factor
+- ARO = Annualized Rate of Occurrence
+- ALE = Annual Loss Expectancy
+
+**Qualitative Analysis** uses descriptive ratings (High/Medium/Low).`
+      },
+      {
+        name: "Security Governance & Ethics",
+        content: `**Governance Hierarchy:**
+Policy → Standard → Baseline → Guideline → Procedure
+
+- **Policy** – High-level mandatory rules (e.g., "All data must be encrypted")
+- **Standard** – Specific mandatory requirements (e.g., "Use AES-256")
+- **Baseline** – Minimum security configurations
+- **Guideline** – Recommended (non-mandatory) practices
+- **Procedure** – Step-by-step instructions
+
+**Security Frameworks:** NIST CSF, ISO 27001, CIS Controls, COBIT
+
+**ISC2 Code of Ethics Canons** (in order of priority):
+1. Protect society, the common good, necessary public trust and confidence
+2. Act honorably, honestly, justly, responsibly, and legally
+3. Provide diligent and competent service to principals
+4. Advance and protect the profession`
+      }
+    ],
+    questions: [
+      {
+        q: "An organization wants to ensure that no single administrator can both create user accounts AND assign permissions. Which security principle does this implement?",
+        options: ["Least privilege", "Separation of duties", "Defense in depth", "Need to know"],
+        answer: 1,
+        explanation: "Separation of duties ensures that no single person controls an entire sensitive process, reducing insider threat risk. Least privilege limits what a single user can do, but separation of duties splits tasks between multiple people."
+      },
+      {
+        q: "Which component of the CIA triad is MOST directly impacted by a ransomware attack that encrypts files?",
+        options: ["Confidentiality", "Integrity", "Availability", "Non-repudiation"],
+        answer: 2,
+        explanation: "Ransomware encrypts files, making them inaccessible to authorized users — this directly attacks Availability. While integrity is also affected, the primary impact and the attacker's leverage comes from denying access."
+      },
+      {
+        q: "A company's annual loss expectancy (ALE) for a specific risk is $50,000. A control costing $70,000/year would reduce the ALE to $10,000. What should the organization do?",
+        options: ["Implement the control because it reduces risk", "Reject the control because costs exceed benefits", "Transfer the risk to an insurer", "Ignore the risk since ALE is low"],
+        answer: 1,
+        explanation: "Cost-benefit analysis: the control costs $70,000/year but only saves $40,000/year ($50,000 - $10,000). Since the control cost exceeds the benefit, it is not cost-effective. The organization should look for less expensive controls or consider risk transfer."
+      },
+      {
+        q: "Which data classification label would be applied to information that could cause exceptionally grave damage to national security if disclosed?",
+        options: ["Confidential", "Secret", "Top Secret", "Sensitive"],
+        answer: 2,
+        explanation: "In government classification, Top Secret is applied to information whose unauthorized disclosure could cause 'exceptionally grave damage' to national security. Secret = serious damage; Confidential = damage. These are government terms — commercial equivalents differ."
+      },
+      {
+        q: "According to the ISC2 Code of Ethics, what is the FIRST priority?",
+        options: ["Act honorably and honestly", "Protect society and the common good", "Provide diligent service to employers", "Advance and protect the profession"],
+        answer: 1,
+        explanation: "The ISC2 Code of Ethics canons are listed in priority order. The first canon — protecting society, the common good, and public trust — takes precedence over duties to employers or the profession when conflicts arise."
+      },
+      {
+        q: "A user logs into a system with a username and password, and then the system determines what resources they can access. What are these two actions called?",
+        options: ["Identification and Authentication", "Authentication and Authorization", "Authorization and Accountability", "Identification and Non-repudiation"],
+        answer: 1,
+        explanation: "Authentication verifies WHO the user is (proving identity with credentials). Authorization determines WHAT that authenticated user is allowed to do. These are sequential steps: authenticate first, then authorize."
+      },
+      {
+        q: "A hospital encrypts patient records on its database server, requires VPN for remote staff access, and maintains redundant power and clustered database servers. Which combination of CIA triad elements is being addressed by encryption and VPN, and clustering respectively?",
+        options: ["Integrity, Availability, Confidentiality", "Confidentiality, Confidentiality, Availability", "Availability, Integrity, Confidentiality", "Confidentiality, Integrity, Availability"],
+        answer: 1,
+        explanation: "Both encryption at rest and VPN access primarily protect Confidentiality (preventing unauthorized disclosure of data in storage and in transit). Clustering/redundant servers address Availability (uptime). None of these three controls primarily addresses Integrity, which would need hashing or digital signatures."
+      },
+      {
+        q: "A risk assessment determines a server has a 10% Annualized Rate of Occurrence (ARO) for a specific compromise, with a Single Loss Expectancy (SLE) of $200,000. What is the Annualized Loss Expectancy (ALE)?",
+        options: ["$2,000", "$20,000", "$200,000", "$2,000,000"],
+        answer: 1,
+        explanation: "ALE = SLE × ARO = $200,000 × 0.10 = $20,000. This is the expected yearly loss from this risk and is used to justify whether a proposed control's annual cost is worth the risk reduction it provides."
+      },
+      {
+        q: "An organization's policy states 'all remote access must use multi-factor authentication.' A department later writes a document specifying that remote access MFA must use a hardware token, not SMS codes. What is this second document called?",
+        options: ["Guideline", "Procedure", "Standard", "Baseline"],
+        answer: 2,
+        explanation: "A standard provides specific mandatory technical requirements that support a higher-level policy. Specifying exactly which MFA mechanism is required (hardware token, not SMS) is a precise mandatory requirement — the hallmark of a standard, not a recommendation (guideline) or step-by-step instructions (procedure)."
+      },
+      {
+        q: "Which of the following BEST describes the concept of 'due diligence' in a security governance context?",
+        options: ["Taking action after a risk has been identified to reduce it", "The ongoing research and investigation needed to understand risks before acting", "Insurance coverage purchased to transfer financial risk", "A formal contract requiring a vendor to meet security SLAs"],
+        answer: 1,
+        explanation: "Due diligence refers to the research, investigation, and understanding of risk BEFORE action is taken — essentially 'doing your homework.' Due CARE, by contrast, refers to the actions taken in response to that knowledge (implementing reasonable protections). The exam frequently tests this distinction."
+      },
+      {
+        q: "A security officer is evaluating a newly identified risk. The cost of mitigation exceeds the asset's value, and the organization decides to continue operating without additional controls, formally acknowledging potential loss. Which risk treatment was selected?",
+        options: ["Risk avoidance", "Risk transfer", "Risk acceptance", "Risk mitigation"],
+        answer: 2,
+        explanation: "Risk acceptance means the organization knowingly tolerates a risk, typically because the cost of treating it exceeds the potential loss, or the risk is within acceptable tolerance. No additional control is implemented, and the organization formally acknowledges the exposure."
+      },
+      {
+        q: "Which statement BEST distinguishes a security policy from a security procedure?",
+        options: ["A policy is technical and detailed; a procedure is broad and conceptual", "A policy states what must be done and why; a procedure states the specific steps to do it", "Policies are optional; procedures are mandatory", "Procedures apply to executives; policies apply to staff"],
+        answer: 1,
+        explanation: "A policy is a high-level statement of management intent — what must happen and why (e.g., 'all sensitive data must be encrypted'). A procedure provides the specific, sequential steps to accomplish that policy's intent (e.g., exact commands/settings to apply encryption)."
+      },
+      {
+        q: "An organization's data classification scheme labels information as Public, Internal, Confidential, and Restricted. A spreadsheet contains customer financial details and would cause significant harm to the company and customers if disclosed. How should this data MOST likely be classified?",
+        options: ["Public", "Internal", "Confidential", "Restricted"],
+        answer: 3,
+        explanation: "Data whose unauthorized disclosure would cause significant or severe harm typically receives the highest classification level available in the scheme (here, Restricted), which mandates the strictest handling controls — encryption, limited access, and audit logging."
+      },
+      {
+        q: "Which scenario is the BEST example of a violation of the 'non-repudiation' security principle?",
+        options: ["An employee successfully denies sending a digitally signed contract despite cryptographic evidence proving otherwise", "An attacker reads an unencrypted email in transit", "A user's account is locked after failed login attempts", "A backup fails to restore correctly after a disaster"],
+        answer: 0,
+        explanation: "Non-repudiation ensures a party cannot credibly deny having performed an action (like signing a document), typically enforced through digital signatures and audit trails. If someone successfully denies an action despite strong cryptographic proof, the goal of non-repudiation has been undermined or improperly implemented."
+      },
+      {
+        q: "A security awareness program teaches employees to recognize that 'urgency, authority, and fear' are commonly used psychological tactics in attacks. This training is MOST relevant to defending against which threat category?",
+        options: ["Zero-day exploits", "Social engineering attacks", "Distributed denial-of-service attacks", "SQL injection attacks"],
+        answer: 1,
+        explanation: "Social engineering relies on psychological manipulation — exploiting urgency, authority, fear, or trust — to trick victims into bypassing normal security judgment (e.g., clicking links, transferring funds, revealing credentials). Technical attacks like SQLi or DDoS do not rely on these human-factor techniques."
+      },
+      {
+        q: "A company assesses a particular risk as 'high likelihood, high impact' using descriptive ratings rather than dollar figures. What type of risk analysis is being performed?",
+        options: ["Quantitative risk analysis", "Qualitative risk analysis", "Residual risk analysis", "Control gap analysis"],
+        answer: 1,
+        explanation: "Qualitative risk analysis uses descriptive, relative ratings (High/Medium/Low or similar scales) rather than precise financial figures. Quantitative analysis instead assigns numeric/monetary values (like ALE, SLE) to enable cost-benefit comparisons."
+      },
+      {
+        q: "Which of the following is the BEST example of the 'least privilege' principle being correctly applied?",
+        options: ["A help desk technician is granted full domain administrator rights to simplify password resets", "A junior accountant's account has read/write access to only the accounts payable system needed for their role", "All employees share one elevated account for convenience during audits", "A contractor retains system access for six months after their contract ends, in case it's needed again"],
+        answer: 1,
+        explanation: "Least privilege means granting only the minimum access necessary to perform job functions — nothing more. Limiting the accountant to exactly the system(s) their role requires is the correct application. Granting broad admin rights for convenience, or retaining unnecessary access, both violate the principle."
+      },
+      {
+        q: "An organization is deciding between two controls: Control A costs $15,000/year and reduces ALE from $40,000 to $30,000. Control B costs $8,000/year and reduces ALE from $40,000 to $33,000. From a pure cost-benefit standpoint, which is the better choice?",
+        options: ["Control A, because it reduces risk more in absolute terms", "Control B, because its net loss is smaller", "Neither — both controls cost more than the benefit they provide", "Control A, because higher cost always implies higher quality"],
+        answer: 2,
+        explanation: "Control A: benefit = $10,000 saved, cost = $15,000 → net loss of $5,000/year. Control B: benefit = $7,000 saved, cost = $8,000 → net loss of $1,000/year. Both controls cost more than the risk reduction they provide, so neither is cost-justified as designed; the organization should seek cheaper alternatives."
+      },
+      {
+        q: "Which of the following best reflects the ISC2 Code of Ethics canon 'provide diligent and competent service to principals'?",
+        options: ["Reporting a colleague's unethical behavior to authorities", "Only accepting projects within one's actual area of expertise and keeping skills current", "Refusing to work overtime even during a security incident", "Publicly criticizing a competitor's security practices"],
+        answer: 1,
+        explanation: "Providing diligent and competent service means practitioners should only take on work they are qualified for, perform it with care, and keep their knowledge current — ensuring 'principals' (employers, clients) receive competent service. This canon is about professional competence and diligence, ranked third after society and personal conduct."
+      },
+      {
+        q: "A vulnerability has a LOW likelihood of being exploited but, if exploited, would cause catastrophic, business-ending impact. How should this risk generally be prioritized?",
+        options: ["Ignored, since likelihood is low", "Still treated seriously, since impact severity can outweigh low likelihood", "Automatically transferred via insurance regardless of cost", "Deferred until likelihood increases"],
+        answer: 1,
+        explanation: "Risk = Likelihood × Impact, but a catastrophic impact (e.g., business-ending) often warrants serious attention even at low likelihood, because the consequence is unacceptable if it occurs. Many organizations apply special handling to 'low probability/high consequence' risks rather than dismissing them due to low likelihood alone."
+      },
+      {
+        q: "Which of these is the clearest example of 'security through obscurity' as a (weak) standalone control?",
+        options: ["Encrypting a database with AES-256", "Running a web service on a non-standard port instead of patching a known vulnerability", "Implementing role-based access control", "Enforcing multi-factor authentication for all admins"],
+        answer: 1,
+        explanation: "Security through obscurity relies on hiding details (like using a non-standard port) rather than fixing the underlying weakness. It provides minimal real protection because determined attackers can still discover the obscured detail through scanning. It should never be the only protection in place — patching the vulnerability is the real fix."
+      },
+      {
+        q: "An organization wants to ensure that financial transactions over $10,000 require approval from two different employees before processing. This control is BEST classified as:",
+        options: ["Least privilege", "Separation of duties", "Defense in depth", "Mandatory access control"],
+        answer: 1,
+        explanation: "Requiring two different people to approve high-value transactions is a classic separation of duties control (sometimes called 'two-person integrity' or 'dual control'), preventing any single individual from completing a sensitive process alone and reducing fraud risk."
+      },
+      {
+        q: "Which best describes 'residual risk'?",
+        options: ["The total risk before any controls are applied", "The risk that remains after controls have been implemented", "The risk that has been fully transferred to a third party", "The theoretical maximum risk an organization could face"],
+        answer: 1,
+        explanation: "Residual risk is what remains after security controls have been applied to reduce inherent risk. No control eliminates risk entirely, so residual risk is the leftover exposure that management must accept, further mitigate, or otherwise treat."
+      },
+      {
+        q: "A penetration tester is hired and given a signed authorization document outlining scope, rules of engagement, and timeframe before testing begins. What is the PRIMARY purpose of this document?",
+        options: ["To guarantee the test will find all vulnerabilities", "To provide legal authorization and define boundaries, protecting both parties", "To replace the need for a non-disclosure agreement", "To ensure the tester is certified"],
+        answer: 1,
+        explanation: "A signed scope/rules-of-engagement document (often called a 'get out of jail free' letter) provides legal authorization for the testing activity and defines exactly what is and isn't permitted. Without it, the same actions could be considered unauthorized computer access — a crime in most jurisdictions."
+      },
+      {
+        q: "Under most commercial data classification schemes, which two labels are typically the LEAST and MOST restrictive, respectively?",
+        options: ["Confidential (least), Public (most)", "Public (least), Confidential (most)", "Private (least), Sensitive (most)", "Sensitive (least), Private (most)"],
+        answer: 1,
+        explanation: "In common commercial classification schemes, 'Public' is the least restrictive (freely shareable), while 'Confidential' is typically the most restrictive (requiring strict access controls), with 'Sensitive' and 'Private' often falling in between depending on the organization's specific scheme."
+      },
+      {
+        q: "An employee receives a phone call from someone claiming to be from IT, urgently requesting their password to 'fix an account issue before close of business.' What combination of social engineering elements is being used?",
+        options: ["Baiting and tailgating", "Authority and urgency", "Pretexting and shoulder surfing", "Spear phishing and whaling"],
+        answer: 1,
+        explanation: "The caller is invoking authority (claiming to be IT staff) and urgency (a deadline before close of business) — two of the most common psychological levers in social engineering — to pressure the victim into bypassing normal caution and revealing a password over the phone."
+      }
+    ]
+  },
+  {
+    id: 2,
+    title: "Incident Response, Business Continuity & Disaster Recovery",
+    weight: "13%",
+    icon: "🔥",
+    color: "#9e3a1a",
+    bg: "#fbeee8",
+    topics: [
+      {
+        name: "Incident Response Process",
+        content: `**NIST Incident Response Lifecycle:**
+1. **Preparation** – Policies, tools, training, IR team
+2. **Detection & Analysis** – Identify and confirm incident
+3. **Containment** – Stop the spread (short-term and long-term)
+4. **Eradication** – Remove the threat (malware, attacker access)
+5. **Recovery** – Restore systems to normal operations
+6. **Post-Incident Activity** – Lessons learned, documentation
+
+**Incident vs. Event:**
+- **Event** – Any observable occurrence in a system/network
+- **Incident** – An event that violates security policy or causes harm
+
+**First Responder Priority:** Contain, then preserve evidence (do not turn off systems without guidance).
+
+**Chain of Custody** – Documentation tracking evidence handling for legal proceedings.`
+      },
+      {
+        name: "Business Continuity Planning",
+        content: `**BCP (Business Continuity Plan)** – Keeps the business running during/after a disruption.
+**DRP (Disaster Recovery Plan)** – Technical plan to restore IT systems after a disaster.
+
+**Key Metrics:**
+- **RTO (Recovery Time Objective)** – Maximum acceptable downtime before business suffers unacceptably
+- **RPO (Recovery Point Objective)** – Maximum acceptable data loss measured in time
+- **MTD/MAD (Maximum Tolerable Downtime)** – Absolute maximum before organization fails
+
+**BIA (Business Impact Analysis):**
+- Identifies critical business functions
+- Quantifies impact of disruptions
+- Establishes RTO/RPO for each function
+
+**Recovery Site Types:**
+- **Hot Site** – Fully operational duplicate; immediate failover; most expensive
+- **Warm Site** – Partially configured; needs some setup; moderate cost
+- **Cold Site** – Space only, no equipment; cheapest; longest recovery time
+- **Mobile Site** – Transportable facility`
+      },
+      {
+        name: "Backup Strategies",
+        content: `**Backup Types:**
+- **Full Backup** – All data; slowest to back up, fastest to restore
+- **Incremental** – Only changes since last backup (any type); fastest to back up, slowest to restore
+- **Differential** – Only changes since last FULL backup; medium backup time, faster restore than incremental
+
+**3-2-1 Rule:** 3 copies of data, on 2 different media types, with 1 copy offsite.
+
+**RAID (Redundant Array of Independent Disks):**
+- RAID 0 – Striping, no redundancy (performance)
+- RAID 1 – Mirroring (simple redundancy)
+- RAID 5 – Striping with parity (most common)
+- RAID 10 – Mirror + stripe (performance + redundancy)
+
+Note: RAID is NOT a backup solution — it protects against hardware failure only.`
+      }
+    ],
+    questions: [
+      {
+        q: "During incident response, a security analyst discovers active ransomware spreading across the network. What should be the FIRST action?",
+        options: ["Eradicate the malware from infected systems", "Contain the spread by isolating affected systems", "Perform forensic analysis on patient zero", "Notify law enforcement immediately"],
+        answer: 1,
+        explanation: "Containment comes before eradication. The immediate priority is stopping the spread (isolating systems, blocking lateral movement). Forensics and notifications come later. Eradicating malware on one system while others are still being infected is ineffective."
+      },
+      {
+        q: "A hospital's critical patient monitoring system has an RTO of 15 minutes and an RPO of 5 minutes. What do these values mean?",
+        options: ["The system can be down 5 min and can lose 15 min of data", "The system must be restored within 15 min and can lose no more than 5 min of data", "Recovery will take 15 minutes and the system backs up every 5 minutes", "The system has 15 minutes before MTD and checkpoints every 5 minutes"],
+        answer: 1,
+        explanation: "RTO (Recovery Time Objective) = max acceptable downtime = 15 minutes to restore. RPO (Recovery Point Objective) = max acceptable data loss = no more than 5 minutes of data can be lost. These metrics drive backup frequency and recovery site requirements."
+      },
+      {
+        q: "An organization performs a full backup every Sunday. On Wednesday, they perform an incremental backup. On Thursday, a restore is needed. Which backups are required?",
+        options: ["Sunday full + Wednesday incremental only", "Sunday full + Monday + Tuesday + Wednesday incrementals", "Only Wednesday incremental", "Sunday full only"],
+        answer: 1,
+        explanation: "Incremental backups only capture changes since the LAST backup (of any type). To restore to Wednesday's state, you need Sunday's full backup PLUS each incremental backup (Monday, Tuesday, Wednesday) applied in sequence. This is why incremental restores take longer."
+      },
+      {
+        q: "Which disaster recovery site type provides the FASTEST recovery time but at the HIGHEST cost?",
+        options: ["Cold site", "Warm site", "Hot site", "Mobile site"],
+        answer: 2,
+        explanation: "A hot site is a fully operational duplicate of the primary site with current data synchronization and ready systems. Failover can occur in minutes or hours. Cold sites are cheapest but take days/weeks to activate. Warm sites fall in between."
+      },
+      {
+        q: "What is the PRIMARY purpose of a Business Impact Analysis (BIA)?",
+        options: ["To identify vulnerabilities in business systems", "To determine the financial cost of security controls", "To identify critical functions and quantify the impact of disruptions", "To document the incident response procedures"],
+        answer: 2,
+        explanation: "A BIA identifies which business functions are critical, determines dependencies, and quantifies the financial and operational impact of disruptions. The output (RTO, RPO values per function) directly informs BCP/DRP development."
+      },
+      {
+        q: "During the eradication phase of incident response, a team removes malware from all infected hosts and closes the vulnerability that allowed initial access. What should happen immediately AFTER eradication, before declaring the incident closed?",
+        options: ["Recovery — restoring systems to normal operations and verifying they are clean", "Containment — isolating remaining unaffected systems", "Preparation — updating the IR plan for next time", "Detection — searching for the next incident"],
+        answer: 0,
+        explanation: "The standard order is Preparation → Detection & Analysis → Containment → Eradication → Recovery → Post-Incident Activity. After eradication removes the threat, Recovery restores affected systems to normal production and verifies they are functioning correctly and free of compromise before the incident is closed."
+      },
+      {
+        q: "A company's primary data center experiences total destruction during a flood. The DRP calls for failover to an alternate site that is a fully mirrored, continuously synchronized environment ready to take over within minutes. This is BEST classified as:",
+        options: ["A cold site", "A reciprocal agreement", "A hot site", "A warm site"],
+        answer: 2,
+        explanation: "A hot site maintains a fully mirrored, continuously synchronized environment that can take over operations almost immediately, minimizing downtime. This provides the lowest RTO of all the recovery site options but is also the most expensive to maintain."
+      },
+      {
+        q: "Which of the following is the BEST reason an organization would choose differential backups over incremental backups, despite differential backups generally taking longer to create?",
+        options: ["Differential backups require less storage overall", "Differential backups generally provide faster restore times since only the full backup plus the latest differential are needed", "Differential backups do not require a full backup as a baseline", "Differential backups eliminate the need for offsite storage"],
+        answer: 1,
+        explanation: "A differential backup captures everything changed since the LAST FULL backup. To restore, you only need the most recent full backup plus the most recent differential — fewer pieces than incremental restores (which require the full backup plus every incremental since). This makes differential restores faster, at the cost of larger and slower backup operations over time."
+      },
+      {
+        q: "An organization's IT team wants to test their disaster recovery plan without disrupting live production systems. Which test type involves participants talking through the plan step-by-step in a conference room, without actually activating any systems?",
+        options: ["Full interruption test", "Parallel test", "Tabletop exercise", "Simulation test"],
+        answer: 2,
+        explanation: "A tabletop exercise is a discussion-based walkthrough where stakeholders talk through their roles and responses to a hypothetical scenario without actually activating systems. It is the least disruptive and least costly test type, useful for validating plan logic before more intensive tests like parallel or full interruption tests."
+      },
+      {
+        q: "A SOC analyst is documenting every person who handled a piece of digital evidence, including timestamps and the purpose of each handling, from collection through court presentation. What is this process called?",
+        options: ["Data remanence tracking", "Chain of custody", "Evidence triage", "Forensic imaging"],
+        answer: 1,
+        explanation: "Chain of custody is the chronological documentation showing the seizure, custody, control, transfer, analysis, and disposition of evidence. It is essential for ensuring evidence integrity and admissibility in legal proceedings — any gap or unaccounted handling can render evidence inadmissible."
+      },
+      {
+        q: "An e-commerce company calculates that for every hour its website is down during peak season, it loses $50,000 in revenue and incurs significant reputational damage. Which BCP/DR document would MOST directly capture and formalize this kind of impact data?",
+        options: ["Business Impact Analysis (BIA)", "Disaster Recovery Plan (DRP)", "Incident Response Plan (IRP)", "Service Level Agreement (SLA)"],
+        answer: 0,
+        explanation: "The Business Impact Analysis is specifically designed to capture and quantify the operational and financial impact of downtime for each business function (like the e-commerce website), which then drives the RTO/RPO targets used to build the DRP."
+      },
+      {
+        q: "During the detection and analysis phase, an analyst must decide whether an unusual login alert represents a true incident or a false positive before escalating. What is the PRIMARY risk of escalating every alert as a full incident without this triage step?",
+        options: ["It guarantees faster recovery times", "It wastes limited incident response resources and can cause alert fatigue, reducing effectiveness over time", "It eliminates the need for a BIA", "It automatically satisfies chain of custody requirements"],
+        answer: 1,
+        explanation: "Proper triage during detection and analysis distinguishes genuine incidents from benign anomalies or false positives. Treating every alert as a full-blown incident exhausts IR team resources and can cause alert fatigue, ultimately making the team slower to respond to genuinely critical incidents."
+      },
+      {
+        q: "Which statement BEST describes the relationship between RPO and backup frequency?",
+        options: ["RPO has no relationship to how often backups are taken", "A smaller (shorter) RPO generally requires more frequent backups or continuous replication to minimize potential data loss", "A larger RPO always requires more frequent backups", "RPO only applies to full backups, never incremental ones"],
+        answer: 1,
+        explanation: "RPO defines the maximum acceptable amount of data loss measured in time. A short RPO (e.g., 5 minutes) means backups or replication must occur very frequently — potentially continuous replication — to ensure no more than that small window of data is ever at risk of loss."
+      }
+    ]
+  },
+  {
+    id: 3,
+    title: "Access Controls Concepts",
+    weight: "22%",
+    icon: "🔐",
+    color: "#1a7a3a",
+    bg: "#e8f7ed",
+    topics: [
+      {
+        name: "Physical Access Controls",
+        content: `**Defense in Depth (Layered Security):**
+Outer perimeter → Building → Floor → Server Room → Equipment
+
+**Physical Controls:**
+- **Fences** – Deter/delay attackers; not absolute barriers
+- **Bollards** – Prevent vehicle attacks
+- **Mantraps/Airlocks** – Two-door entry; prevents tailgating
+- **Guards** – Human response capability
+- **Badge Readers / Smart Cards** – Electronic access
+- **Biometrics** – Fingerprint, retina, voice recognition
+- **CCTV/Video Surveillance** – Monitoring and evidence
+- **Lighting** – Deters attackers; aids cameras
+- **Locks** – Mechanical (pin tumbler) or electronic
+
+**Tailgating/Piggybacking** – Unauthorized person follows authorized person through a door. Prevented by mantraps and guard awareness.
+
+**Crime Prevention Through Environmental Design (CPTED)** – Uses design to reduce crime opportunity.`
+      },
+      {
+        name: "Logical Access Controls",
+        content: `**Access Control Models:**
+
+**DAC (Discretionary Access Control):**
+- Object owner decides permissions
+- Flexible but difficult to manage at scale
+- Example: Windows file sharing permissions
+
+**MAC (Mandatory Access Control):**
+- System enforces access based on labels/clearances
+- Users cannot override policy
+- Example: Government systems (Top Secret, Secret)
+
+**RBAC (Role-Based Access Control):**
+- Permissions assigned to roles, users assigned to roles
+- Most common in enterprises
+- Example: "Sales Manager" role has CRM read/write
+
+**ABAC (Attribute-Based Access Control):**
+- Context-aware: time, location, device, department
+- Most flexible and fine-grained
+- Example: "Allow access only from corporate devices during business hours"
+
+**Rule-Based Access Control** – Policies based on rules (like firewall rules); don't confuse with RBAC.`
+      },
+      {
+        name: "Identity & Access Management",
+        content: `**Identity Lifecycle:**
+Provisioning → Active Management → Deprovisioning
+
+**Key Concepts:**
+- **Identification** – Claiming an identity (username)
+- **Authentication** – Proving the claimed identity
+- **Authorization** – What you can do
+- **Accountability** – Tracking what you did (audit logs)
+
+**SSO (Single Sign-On)** – One authentication for multiple systems. Reduces password fatigue but single point of failure.
+
+**Federation** – Extending identity across organizations. Protocols: SAML, OAuth, OpenID Connect.
+
+**Privileged Account Management (PAM)** – Special controls for admin/root accounts:
+- Just-in-time access
+- Session recording
+- Password vaulting
+- Principle of least privilege
+
+**Account Types:** User, Privileged, Service, Shared (avoid shared accounts!)`
+      }
+    ],
+    questions: [
+      {
+        q: "A government system assigns security labels like 'Top Secret' and 'Secret' to data. Users can only access data at or below their clearance level. Which access control model is this?",
+        options: ["DAC – Discretionary Access Control", "RBAC – Role-Based Access Control", "MAC – Mandatory Access Control", "ABAC – Attribute-Based Access Control"],
+        answer: 2,
+        explanation: "MAC (Mandatory Access Control) uses security labels on objects and clearance levels for subjects. The system enforces access — individual users cannot override the policy. This is used in government/military environments where strict information separation is required."
+      },
+      {
+        q: "Which physical security control is BEST suited to prevent tailgating into a data center?",
+        options: ["Security cameras (CCTV)", "Biometric door locks", "Mantrap (airlock)", "Security guards at the entrance"],
+        answer: 2,
+        explanation: "A mantrap uses two interlocking doors — the second door won't open until the first is closed and only one person at a time is allowed through. This physically prevents tailgating. CCTV can detect it after the fact, guards can be socially engineered, and biometrics alone don't prevent a second person from following."
+      },
+      {
+        q: "An employee leaves the company. Which process ensures their access is properly removed?",
+        options: ["Access review", "Deprovisioning", "Least privilege enforcement", "Account auditing"],
+        answer: 1,
+        explanation: "Deprovisioning is the formal process of removing an employee's access rights, disabling accounts, recovering devices, and revoking credentials when they leave. This is a critical part of the identity lifecycle to prevent unauthorized access by former employees."
+      },
+      {
+        q: "A new system allows access based on a user's department, job title, time of day, and whether they are using a company device. This is BEST described as:",
+        options: ["RBAC – Role-Based Access Control", "DAC – Discretionary Access Control", "MAC – Mandatory Access Control", "ABAC – Attribute-Based Access Control"],
+        answer: 3,
+        explanation: "ABAC (Attribute-Based Access Control) makes decisions based on multiple attributes: user attributes (department, title), resource attributes, and environmental attributes (time, device). This is more granular and context-aware than RBAC, which only uses roles."
+      },
+      {
+        q: "What is the primary risk of using shared accounts in an organization?",
+        options: ["Higher licensing costs", "Reduced system performance", "Loss of individual accountability in audit logs", "Increased complexity for administrators"],
+        answer: 2,
+        explanation: "Shared accounts destroy accountability — audit logs cannot identify WHICH person performed an action when multiple people use the same credentials. This violates the principle of non-repudiation and makes forensic investigation impossible. Individual accounts must be used for traceability."
+      },
+      {
+        q: "SSO (Single Sign-On) provides users with access to multiple systems using one login. What is the MAIN security concern with SSO?",
+        options: ["It increases password complexity requirements", "A compromised credential gives access to all connected systems", "It slows down authentication for users", "It requires users to remember multiple passwords"],
+        answer: 1,
+        explanation: "While SSO reduces password fatigue and improves user experience, the key security risk is a single point of failure — if credentials are compromised, an attacker gains access to ALL systems connected to the SSO. This makes strong authentication (MFA) for SSO critical."
+      },
+      {
+        q: "A company implements a policy requiring privileged administrator accounts to request elevated access for a limited time window only when needed, automatically expiring the elevation afterward. What is this practice called?",
+        options: ["Federation", "Just-in-time (JIT) access", "Discretionary access control", "Account provisioning"],
+        answer: 1,
+        explanation: "Just-in-time (JIT) access grants elevated privileges only for the specific time period they are needed, then automatically revokes them. This reduces the window of opportunity for misuse of standing privileged access and is a core practice within Privileged Access Management (PAM)."
+      },
+      {
+        q: "Which biometric authentication factor is generally considered to have the LOWEST false acceptance rate, making it among the most accurate for high-security environments?",
+        options: ["Voice recognition", "Facial recognition", "Retina/iris scanning", "Signature dynamics"],
+        answer: 2,
+        explanation: "Retina and iris scanning are generally regarded as among the most accurate biometric methods, with very low false acceptance rates, due to the complexity and uniqueness of iris/retina patterns. Voice and facial recognition, while convenient, are typically more susceptible to spoofing or environmental error."
+      },
+      {
+        q: "An organization wants new employees to automatically receive correct system access based on their department and title the moment HR enters them into the HR system. What process does this describe?",
+        options: ["Manual provisioning", "Automated/automatic provisioning", "Deprovisioning", "Access recertification"],
+        answer: 1,
+        explanation: "Automated (automatic) provisioning integrates the HR system with identity management so that accounts and access rights are created automatically based on role/department data, reducing delays and manual errors compared to manual provisioning."
+      },
+      {
+        q: "Which of the following is the BEST example of 'something you know' combined with 'something you have' for true multi-factor authentication?",
+        options: ["A password and a security question", "A fingerprint scan and a retina scan", "A PIN and a physical smart card", "Two different passwords for two different systems"],
+        answer: 2,
+        explanation: "True MFA requires factors from DIFFERENT categories. A PIN (something you know) plus a physical smart card (something you have) satisfies this. Two passwords are both 'something you know' — not MFA. Two biometrics are both 'something you are' — also not true MFA."
+      },
+      {
+        q: "A financial company requires that the employee who initiates a wire transfer cannot be the same employee who approves it. Which access control concept does this directly implement?",
+        options: ["Mandatory vacations", "Separation of duties", "Job rotation", "Dual control via least privilege alone"],
+        answer: 1,
+        explanation: "Separation of duties ensures no single individual has end-to-end control over a sensitive transaction, requiring at least two people to collude to commit fraud. This is distinct from least privilege, which limits an individual's access but doesn't necessarily split a process between people."
+      },
+      {
+        q: "Which access control model would be MOST appropriate for a hospital that needs to grant a visiting specialist temporary access to a specific patient's records only during their scheduled consultation hours?",
+        options: ["DAC, since the patient can grant access personally", "MAC, using strict classification labels", "ABAC, using attributes like time, role, and patient assignment", "RBAC alone, using only job title"],
+        answer: 2,
+        explanation: "ABAC (Attribute-Based Access Control) can combine multiple contextual attributes — role (specialist), assignment (this specific patient), and time (consultation hours) — to create precise, dynamic access rules. RBAC alone (just job title) couldn't restrict to a specific patient or time window without additional attributes."
+      },
+      {
+        q: "What is the PRIMARY purpose of conducting periodic access reviews (access recertification)?",
+        options: ["To reset all user passwords on a schedule", "To verify that users still require the access they currently have, and revoke what's unnecessary", "To replace the need for deprovisioning when employees leave", "To measure system performance under load"],
+        answer: 1,
+        explanation: "Access reviews (recertification) are periodic audits where managers or system owners confirm that each user's current access is still appropriate for their role, catching 'privilege creep' where employees accumulate unnecessary access over time through role changes or one-off requests."
+      },
+      {
+        q: "A user's badge grants access to the lobby and their own department floor, but not the server room or executive suite. This layered restriction based on physical zones is an example of:",
+        options: ["Federation", "Defense in depth applied to physical security", "Discretionary access control", "Non-repudiation"],
+        answer: 1,
+        explanation: "Applying multiple layers of physical access restriction (lobby → floor → restricted areas) so that reaching more sensitive areas requires passing through multiple controlled checkpoints is defense in depth applied physically — no single badge swipe grants access to everything."
+      },
+      {
+        q: "Which statement about Kerberos authentication is MOST accurate?",
+        options: ["It uses asymmetric encryption exclusively and never expires tickets", "It relies on a trusted third party (KDC) and time-stamped tickets to authenticate users across a network", "It is primarily used for physical access control to buildings", "It eliminates the need for any centralized authentication server"],
+        answer: 1,
+        explanation: "Kerberos is a network authentication protocol that relies on a trusted third party called the Key Distribution Center (KDC), issuing time-stamped tickets that allow users to authenticate to multiple services without repeatedly entering credentials. Ticket lifetimes and clock synchronization (often via NTP) are critical to its security."
+      },
+      {
+        q: "An organization discovers that several terminated employees' accounts remained active for weeks after their last day. Which control failure does this BEST represent?",
+        options: ["Failure of least privilege", "Failure of the deprovisioning process within the identity lifecycle", "Failure of multi-factor authentication", "Failure of role-based access control definitions"],
+        answer: 1,
+        explanation: "Deprovisioning is the step in the identity lifecycle responsible for promptly disabling/removing access when an employee departs. Active accounts persisting after termination indicate a breakdown in this specific process — a major audit finding and security risk, since former employees retain potential access."
+      },
+      {
+        q: "Which of the following BEST describes a 'mantrap' in physical security and why it is effective?",
+        options: ["A hidden camera system that records visitors without their knowledge", "A two-door vestibule that only allows the second door to open after the first is closed, limiting passage to one person at a time", "A motion-activated alarm that triggers when unauthorized movement is detected", "A badge reader that logs entry and exit times for auditing"],
+        answer: 1,
+        explanation: "A mantrap (security vestibule/airlock) is a physical control with two interlocking doors; the second cannot open until the first closes, and typically only one person can occupy the space at a time — directly preventing tailgating/piggybacking into secure areas."
+      },
+      {
+        q: "Which statement correctly differentiates 'identification' from 'authentication'?",
+        options: ["Identification proves who you are; authentication merely claims who you are", "Identification is claiming an identity (e.g., entering a username); authentication is proving that claimed identity (e.g., entering a password)", "Identification and authentication are interchangeable terms in security", "Authentication always precedes identification in the login process"],
+        answer: 1,
+        explanation: "Identification is the act of asserting an identity, typically by entering a username — it makes no claim of proof. Authentication is the subsequent step where that asserted identity is verified/proven, typically via a password, token, or biometric. Identification always comes first, followed by authentication."
+      },
+      {
+        q: "A company implements a rule on its network access control system: 'Deny all traffic from any IP address located outside the country, regardless of user identity or role.' This is an example of:",
+        options: ["Role-Based Access Control (RBAC)", "Rule-Based Access Control", "Discretionary Access Control (DAC)", "Attribute-Based Access Control (ABAC) exclusively"],
+        answer: 1,
+        explanation: "This is Rule-Based Access Control — a static, predefined rule applied uniformly regardless of who the user is (their role, attributes, or identity). It contrasts with RBAC (role-driven) and ABAC (multiple dynamic attributes), though in practice some implementations blend rule logic with attributes."
+      },
+      {
+        q: "Why are service accounts (used by applications/systems rather than humans) typically considered HIGH risk if not properly managed?",
+        options: ["They are inexpensive to create and manage", "They often have broad permissions, rarely have their passwords rotated, and are not tied to a single accountable human", "They are automatically disabled after 90 days by default", "They cannot be used to access sensitive data"],
+        answer: 1,
+        explanation: "Service accounts often require elevated permissions to function and are frequently configured with non-expiring passwords for operational stability. Without strict governance (password vaulting, monitoring, rotation), they become attractive, under-monitored targets for attackers and are harder to tie to individual accountability."
+      },
+      {
+        q: "Which scenario BEST illustrates 'privilege creep'?",
+        options: ["A new hire is granted exactly the access defined for their role on day one", "An employee who has changed roles three times over five years still retains access rights from all previous roles, none of which were revoked", "A contractor's access automatically expires at the end of their contract", "An administrator's elevated session is automatically logged for audit purposes"],
+        answer: 1,
+        explanation: "Privilege creep occurs when users accumulate access rights over time — often through role changes or temporary project needs — that are never revoked when no longer needed. Left unchecked, this violates least privilege and significantly expands the organization's attack surface. Regular access reviews are the primary defense."
+      },
+      {
+        q: "An organization wants to grant a third-party auditor read-only access to specific financial systems for exactly two weeks during an annual audit, with automatic expiration afterward. Which approach BEST satisfies both least privilege and operational efficiency?",
+        options: ["Create a permanent account and remember to manually disable it later", "Provision a time-bound account scoped to read-only access on the required systems, set to auto-expire after the audit window", "Share an existing employee's credentials with the auditor for convenience", "Grant the auditor full administrative access to simplify the audit"],
+        answer: 1,
+        explanation: "A time-bound, scoped account that automatically expires directly enforces least privilege (read-only, only the needed systems) while removing the risk of forgotten manual deprovisioning. Sharing credentials destroys accountability, and granting admin access vastly exceeds what the auditor needs."
+      }
+    ]
+  },
+  {
+    id: 4,
+    title: "Network Security",
+    weight: "24%",
+    icon: "🌐",
+    color: "#5a1a9e",
+    bg: "#f0e8fb",
+    topics: [
+      {
+        name: "Network Fundamentals",
+        content: `**OSI Model (7 Layers):**
+7 – Application (HTTP, FTP, SMTP, DNS)
+6 – Presentation (Encryption, Compression)
+5 – Session (Session management)
+4 – Transport (TCP, UDP – ports)
+3 – Network (IP addresses, routing)
+2 – Data Link (MAC addresses, switches)
+1 – Physical (cables, hubs, NICs)
+
+**TCP vs UDP:**
+- TCP: Reliable, connection-oriented, 3-way handshake (SYN/SYN-ACK/ACK)
+- UDP: Fast, connectionless, no guarantee (DNS, streaming, VoIP)
+
+**Key Protocols & Ports:**
+- HTTP: 80 | HTTPS: 443 | FTP: 20/21
+- SSH: 22 | Telnet: 23 (insecure!) | SMTP: 25
+- DNS: 53 | DHCP: 67/68 | SNMP: 161/162
+- RDP: 3389 | LDAP: 389 | Kerberos: 88`
+      },
+      {
+        name: "Network Security Devices",
+        content: `**Firewall Types:**
+- **Packet Filtering** – Inspects headers (IP/port); stateless; fast but basic
+- **Stateful Inspection** – Tracks connection state; more intelligent
+- **Application-Layer (Proxy/WAF)** – Inspects payload; can detect app attacks
+- **NGFW (Next-Gen)** – Deep packet inspection, IPS, application awareness
+
+**IDS vs IPS:**
+- **IDS (Intrusion Detection System)** – Detects and ALERTS; passive
+- **IPS (Intrusion Prevention System)** – Detects and BLOCKS; inline; active
+
+**Detection Methods:**
+- **Signature-Based** – Matches known attack patterns; fast but misses zero-days
+- **Anomaly/Behavior-Based** – Baseline + deviation; detects novel attacks; more false positives
+
+**Network Segmentation:**
+- **DMZ (Demilitarized Zone)** – Neutral zone between internet and internal network for public-facing servers
+- **VLAN** – Logical network separation on same physical infrastructure
+- **Air Gap** – Physical isolation from other networks`
+      },
+      {
+        name: "Threats & Attacks",
+        content: `**Common Network Attacks:**
+
+**DoS/DDoS** – Overwhelms resources to deny service. DDoS uses multiple sources (botnet).
+
+**Man-in-the-Middle (MitM)** – Attacker intercepts communication between two parties.
+
+**ARP Poisoning** – Associates attacker's MAC with legitimate IP for MitM on LAN.
+
+**DNS Spoofing/Poisoning** – Corrupts DNS cache to redirect to malicious sites.
+
+**Social Engineering Attacks:**
+- **Phishing** – Mass deceptive email
+- **Spear Phishing** – Targeted phishing
+- **Vishing** – Voice phishing (phone calls)
+- **Smishing** – SMS phishing
+- **Pretexting** – Fabricated scenario to extract information
+- **Baiting** – Physical media (USB) left for victim to find
+
+**Malware Types:**
+- Virus (needs host), Worm (self-replicating), Trojan (disguised), Ransomware, Rootkit (hides itself), Spyware, Adware, Keylogger`
+      },
+      {
+        name: "Encryption & Protocols",
+        content: `**Symmetric Encryption:** Same key for encrypt/decrypt. Fast. Key exchange problem.
+- Examples: AES (standard), DES (deprecated), 3DES, RC4
+
+**Asymmetric Encryption:** Public/private key pair. Slower. Solves key exchange.
+- Examples: RSA, ECC, Diffie-Hellman (key exchange)
+- Public key = encrypt or verify; Private key = decrypt or sign
+
+**Hashing:** One-way function; produces fixed-length digest. Used for integrity.
+- Examples: MD5 (deprecated), SHA-1 (deprecated), SHA-256 (current standard)
+
+**PKI (Public Key Infrastructure):**
+- CA (Certificate Authority) issues digital certificates
+- Certificate binds public key to identity
+- CRL/OCSP checks certificate revocation
+
+**Secure Protocols:**
+- HTTPS = HTTP + TLS
+- SSH = Secure Telnet/FTP replacement
+- SFTP/FTPS = Secure FTP
+- TLS (current) replaces SSL (deprecated)
+- VPN (IPSec, SSL/TLS) – Encrypted tunnels`
+      }
+    ],
+    questions: [
+      {
+        q: "A company places its web server in a network zone accessible from the internet, separate from the internal corporate network. What is this zone called?",
+        options: ["VLAN", "DMZ (Demilitarized Zone)", "Intranet", "Subnet"],
+        answer: 1,
+        explanation: "A DMZ (Demilitarized Zone) is a network zone between the internet and the internal network. Public-facing servers (web, email, DNS) are placed here so that if compromised, the attacker doesn't have direct internal network access. Firewalls control traffic on both sides of the DMZ."
+      },
+      {
+        q: "Which security device detects suspicious traffic and generates alerts, but does NOT actively block attacks?",
+        options: ["NGFW (Next-Generation Firewall)", "IPS (Intrusion Prevention System)", "IDS (Intrusion Detection System)", "WAF (Web Application Firewall)"],
+        answer: 2,
+        explanation: "An IDS (Intrusion Detection System) monitors network traffic and generates alerts — it is PASSIVE and does NOT block. An IPS is ACTIVE and can block traffic inline. The key exam distinction: IDS = detect and alert; IPS = detect and prevent/block."
+      },
+      {
+        q: "An attacker sends forged ARP replies to associate their MAC address with a legitimate server's IP address. What attack is this?",
+        options: ["DNS Spoofing", "IP Spoofing", "ARP Poisoning", "Session Hijacking"],
+        answer: 2,
+        explanation: "ARP Poisoning (ARP Spoofing) manipulates ARP cache tables on a LAN, causing victims to send traffic to the attacker instead of the legitimate destination. This enables Man-in-the-Middle attacks for credential theft or traffic interception on local networks."
+      },
+      {
+        q: "Which encryption type uses the same key for both encryption and decryption?",
+        options: ["Asymmetric encryption", "Hashing", "Symmetric encryption", "Public key cryptography"],
+        answer: 2,
+        explanation: "Symmetric encryption uses one shared secret key for both encryption and decryption. It's faster than asymmetric but has the key distribution problem — how do you securely share the key? Examples: AES, DES. Asymmetric uses a key pair (public/private)."
+      },
+      {
+        q: "A user receives an email appearing to be from their bank asking them to click a link and verify their account details. What type of attack is this?",
+        options: ["Vishing", "Pretexting", "Spear phishing", "Phishing"],
+        answer: 3,
+        explanation: "This is phishing — a mass social engineering attack via deceptive email impersonating a trusted entity. Spear phishing is targeted at a specific individual. Vishing uses voice/phone calls. Pretexting involves creating a fabricated story/scenario. Since this appears generic/mass, it's standard phishing."
+      },
+      {
+        q: "At which OSI layer do routers primarily operate, and what addressing do they use?",
+        options: ["Layer 2 – MAC addresses", "Layer 3 – IP addresses", "Layer 4 – Port numbers", "Layer 7 – Application data"],
+        answer: 1,
+        explanation: "Routers operate at Layer 3 (Network) and use IP addresses to make routing decisions between networks. Switches operate at Layer 2 (Data Link) using MAC addresses within a network. Layer 4 (Transport) uses port numbers for TCP/UDP communication."
+      },
+      {
+        q: "An attacker floods a target server with SYN packets but never completes the TCP three-way handshake, exhausting connection resources. What is this attack called?",
+        options: ["SYN flood (a type of DoS attack)", "ARP poisoning", "Smurf attack", "Session hijacking"],
+        answer: 0,
+        explanation: "A SYN flood exploits the TCP three-way handshake (SYN, SYN-ACK, ACK) by sending many SYN packets without completing the ACK, leaving connections half-open and exhausting the server's connection table — a classic Denial of Service technique."
+      },
+      {
+        q: "A network administrator segments IoT devices onto their own logical network, separate from corporate workstations, even though both connect to the same physical switches. What technology enables this?",
+        options: ["VPN", "VLAN (Virtual Local Area Network)", "NAT (Network Address Translation)", "DMZ"],
+        answer: 1,
+        explanation: "A VLAN creates logically separate broadcast domains on shared physical switching infrastructure, allowing IoT devices and corporate workstations to be isolated from each other for security purposes without needing separate physical cabling."
+      },
+      {
+        q: "Which statement BEST describes the difference between a vulnerability scanner and a Next-Generation Firewall (NGFW) in terms of function?",
+        options: ["Both perform identical functions and are interchangeable", "A vulnerability scanner identifies weaknesses to fix; an NGFW actively inspects and controls traffic in real time, often including IPS capability", "An NGFW only works on encrypted traffic; vulnerability scanners only work on unencrypted traffic", "Vulnerability scanners block traffic; NGFWs only generate reports"],
+        answer: 1,
+        explanation: "A vulnerability scanner is an assessment tool that identifies known weaknesses in systems (passive, periodic). An NGFW is a real-time traffic control device that combines traditional firewall rules with deep packet inspection, application awareness, and often integrated IPS to actively block threats as they occur."
+      },
+      {
+        q: "Which protocol provides encrypted remote command-line access to a server, replacing the insecure Telnet protocol?",
+        options: ["FTP", "SNMP", "SSH", "SMTP"],
+        answer: 2,
+        explanation: "SSH (Secure Shell) provides encrypted remote terminal/command-line access and file transfer, replacing Telnet (which transmits credentials and data in plaintext). SSH operates on port 22 by default."
+      },
+      {
+        q: "A company wants to ensure email communications cannot be read by anyone intercepting them in transit, while also allowing the recipient to verify the sender's identity. Which combination of cryptographic techniques BEST achieves both goals?",
+        options: ["Hashing only", "Symmetric encryption alone", "Encryption with the recipient's public key, plus a digital signature using the sender's private key", "MAC address filtering combined with a VPN"],
+        answer: 2,
+        explanation: "Encrypting the message with the recipient's public key ensures only the recipient (holding the matching private key) can read it — confidentiality. Digitally signing with the SENDER's private key, verifiable with the sender's public key, proves authenticity and provides non-repudiation. Together, this satisfies both goals."
+      },
+      {
+        q: "Which of the following BEST explains why WPA2 is considered more secure than WEP for wireless networks?",
+        options: ["WPA2 uses a shorter encryption key for faster performance", "WPA2 uses stronger encryption (AES-CCMP) and addresses key management weaknesses present in WEP's RC4 implementation", "WEP supports more simultaneous users than WPA2", "WPA2 does not require any form of authentication"],
+        answer: 1,
+        explanation: "WEP's use of RC4 with weak/reused initialization vectors made it crackable within minutes using widely available tools. WPA2 replaced this with AES-based CCMP encryption and significantly improved key management, making it far more resistant to cryptographic attacks."
+      },
+      {
+        q: "An attacker captures legitimate network traffic between a user and a banking server, then re-sends a previously captured valid transaction request to the server to trigger a duplicate transfer. What is this attack called?",
+        options: ["Replay attack", "Man-in-the-middle attack", "DNS poisoning", "Brute-force attack"],
+        answer: 0,
+        explanation: "A replay attack involves capturing valid data transmissions and retransmitting them later to trick the receiving system into processing them again — exploiting the fact that the data itself was legitimate, just being maliciously reused. Defenses include timestamps, sequence numbers, and nonces."
+      },
+      {
+        q: "Which firewall type tracks the state of active connections (e.g., recognizing that a response packet belongs to an established outbound request) rather than evaluating each packet in isolation?",
+        options: ["Static packet filtering firewall", "Stateful inspection firewall", "Proxy-only firewall", "Circuit-level gateway exclusively"],
+        answer: 1,
+        explanation: "A stateful inspection firewall maintains a state table of active connections, allowing it to make smarter decisions (e.g., automatically permitting return traffic for an established outbound connection) compared to static/stateless packet filtering, which evaluates every packet independently with no memory of prior traffic."
+      },
+      {
+        q: "Which of the following is the PRIMARY security weakness of using Telnet for remote administration?",
+        options: ["It requires too much bandwidth", "It transmits credentials and session data in plaintext, vulnerable to interception", "It cannot be used over the internet", "It only supports IPv6"],
+        answer: 1,
+        explanation: "Telnet sends all data — including usernames and passwords — in unencrypted plaintext, meaning anyone capturing network traffic (e.g., via a sniffer) can read credentials directly. SSH was developed specifically to address this by encrypting the entire session."
+      },
+      {
+        q: "A security analyst notices a large volume of small DNS query packets but unusually large DNS responses being sent toward a single victim's IP address from many different DNS servers. What attack technique is being used?",
+        options: ["DNS amplification (a reflection/amplification DDoS attack)", "DNS spoofing", "ARP poisoning", "Typosquatting"],
+        answer: 0,
+        explanation: "DNS amplification is a reflection-based DDoS technique where an attacker spoofs the victim's IP as the source of small DNS queries to open resolvers, which then send much larger responses to the victim — amplifying the attacker's bandwidth and overwhelming the target."
+      },
+      {
+        q: "Which of the following BEST describes the purpose of a Web Application Firewall (WAF)?",
+        options: ["It filters traffic at Layer 3 based solely on IP addresses", "It inspects and filters HTTP/HTTPS traffic to protect against application-layer attacks like SQL injection and cross-site scripting", "It replaces the need for TLS encryption on web servers", "It only operates on internal network traffic, never internet-facing traffic"],
+        answer: 1,
+        explanation: "A WAF operates at the application layer (Layer 7), specifically inspecting HTTP/HTTPS requests and responses to detect and block attacks targeting web applications — such as SQL injection, XSS, and other OWASP Top 10 threats — that traditional network firewalls cannot see."
+      },
+      {
+        q: "An organization uses IPSec to create a secure tunnel between two office locations over the public internet. Which TWO core services does IPSec primarily provide for this traffic?",
+        options: ["Compression and load balancing", "Encryption (confidentiality) and authentication/integrity of packets", "DNS resolution and NAT traversal only", "Bandwidth throttling and QoS tagging"],
+        answer: 1,
+        explanation: "IPSec provides confidentiality through encryption and authentication/integrity through protocols like AH (Authentication Header) and ESP (Encapsulating Security Payload), making it suitable for building secure site-to-site VPN tunnels over untrusted networks like the internet."
+      },
+      {
+        q: "Which statement correctly describes the relationship between SSL and TLS?",
+        options: ["SSL and TLS are unrelated, competing protocols still both actively recommended today", "TLS is the modern, more secure successor to SSL, which is now deprecated", "SSL is newer and replaces TLS in current implementations", "SSL and TLS both operate exclusively at Layer 2"],
+        answer: 1,
+        explanation: "TLS (Transport Layer Security) succeeded SSL (Secure Sockets Layer) due to significant vulnerabilities discovered in SSL (and early TLS versions). Modern secure communications (HTTPS, VPNs) should use current TLS versions; SSL is deprecated and considered insecure."
+      },
+      {
+        q: "A penetration tester successfully intercepts and modifies traffic between a user's laptop and a coffee shop's public Wi-Fi access point, without either party's knowledge. This is a textbook example of:",
+        options: ["A man-in-the-middle (MitM) attack", "A brute-force attack", "A privilege escalation attack", "A buffer overflow attack"],
+        answer: 0,
+        explanation: "A man-in-the-middle attack occurs when an attacker secretly intercepts (and potentially alters) communication between two parties who believe they are communicating directly with each other. Public/unencrypted Wi-Fi is a common environment for this attack due to the ease of intercepting traffic."
+      },
+      {
+        q: "Which hashing algorithm is now considered cryptographically broken and should NOT be relied upon for security-sensitive integrity verification?",
+        options: ["SHA-256", "SHA-3", "MD5", "SHA-512"],
+        answer: 2,
+        explanation: "MD5 has well-documented collision vulnerabilities, meaning two different inputs can produce the same hash, undermining its use for security purposes like digital signatures or integrity verification. SHA-256, SHA-3, and SHA-512 are current, cryptographically strong alternatives."
+      },
+      {
+        q: "Which best describes the function of a Certificate Authority (CA) within a Public Key Infrastructure (PKI)?",
+        options: ["It generates symmetric session keys for all VPN connections", "It is a trusted entity that issues and digitally signs certificates, binding public keys to verified identities", "It physically stores all private keys for an organization", "It performs real-time packet inspection for malware"],
+        answer: 1,
+        explanation: "A Certificate Authority (CA) is a trusted third party that verifies an entity's identity and issues a digital certificate binding that identity to a public key, digitally signed by the CA. This trust chain allows others to verify that a public key genuinely belongs to the claimed entity."
+      },
+      {
+        q: "An organization's firewall rule set is configured with an implicit 'deny all' rule at the very end of the rule list. What is the security benefit of this approach?",
+        options: ["It improves network performance by reducing rule processing", "Any traffic not explicitly permitted by a prior rule is automatically blocked, following the principle of fail-secure/default deny", "It allows all traffic by default unless specifically blocked", "It eliminates the need for any other firewall rules"],
+        answer: 1,
+        explanation: "A default-deny (implicit deny) posture ensures that any traffic not explicitly allowed is blocked, rather than the reverse. This 'fail-secure' design is a core network security best practice, minimizing the risk of unintentionally permitting unanticipated or malicious traffic."
+      },
+      {
+        q: "A security team observes outbound traffic from an internal workstation periodically contacting an unfamiliar external IP address at regular intervals, even when no user is active. This pattern is MOST indicative of:",
+        options: ["Normal software update checks", "Command-and-control (C2) beaconing from compromised malware", "A misconfigured DNS server", "A scheduled backup job"],
+        answer: 1,
+        explanation: "Regular, periodic 'beaconing' to an unfamiliar external address — especially with no corresponding user activity — is a classic indicator of malware checking in with a command-and-control server for further instructions, a key behavior security monitoring tools look for."
+      }
+    ]
+  },
+  {
+    id: 5,
+    title: "Security Operations",
+    weight: "15%",
+    icon: "⚙️",
+    color: "#7a6a00",
+    bg: "#fafae8",
+    topics: [
+      {
+        name: "Data Security & Classification",
+        content: `**Data States and Protection:**
+- **Data at Rest** – Stored data. Protect with: full-disk encryption (BitLocker, FileVault), file-level encryption, access controls.
+- **Data in Transit** – Moving across network. Protect with: TLS/HTTPS, VPN, IPSec, SSH.
+- **Data in Use** – Being processed. Hardest to protect. Techniques: secure enclaves, DLP agents, memory encryption.
+
+**Data Loss Prevention (DLP):**
+- Network DLP – Monitors traffic for sensitive data leaving the network
+- Endpoint DLP – Controls what can be copied to USB, email, cloud
+- Cloud DLP – Monitors cloud storage and sharing
+
+**Media Handling:**
+- **Data Remanence** – Residual data left on media after deletion
+- **Clearing** – Overwriting data (for reuse within same security level)
+- **Purging** – Degaussing or secure overwrite (for release outside classification)
+- **Destruction** – Physical shredding, incineration, disintegration (highest assurance)`
+      },
+      {
+        name: "System Security",
+        content: `**Hardening** – Reducing attack surface of a system:
+- Remove unnecessary software/services
+- Apply patches and updates
+- Change default credentials
+- Disable unneeded ports
+- Configure minimum permissions
+
+**Patch Management:**
+1. Inventory systems → 2. Identify patches → 3. Test patches → 4. Deploy patches → 5. Verify
+
+**Vulnerability Management:**
+- **Vulnerability Scan** – Automated detection of known weaknesses (non-intrusive)
+- **Penetration Test** – Simulated attack to exploit vulnerabilities (active)
+- **Bug Bounty** – External researchers rewarded for finding vulnerabilities
+
+**Logging & Monitoring:**
+- **SIEM (Security Information and Event Management)** – Collects, correlates, and analyzes logs from multiple sources
+- **Log Integrity** – Logs should be write-once or sent to remote, tamper-resistant server
+- **NTP (Network Time Protocol)** – Synchronize clocks for accurate log correlation`
+      },
+      {
+        name: "Secure Configuration & Baselines",
+        content: `**Configuration Management:**
+- **Baseline** – Known-good configuration of a system
+- **Change Management** – Formal process to make/approve changes
+- **Configuration Management DB (CMDB)** – Records all assets and their configurations
+
+**Virtualization & Cloud Security:**
+- **Type 1 Hypervisor** – Bare-metal (VMware ESXi, Hyper-V) – more secure
+- **Type 2 Hypervisor** – Runs on OS (VirtualBox) – less secure
+- **VM Escape** – Attack where VM code breaks out to host
+- **Cloud Shared Responsibility Model** – Provider secures infrastructure; customer secures data/config
+
+**Cloud Service Models:**
+- **IaaS** – Infrastructure (VMs, storage) – customer manages most
+- **PaaS** – Platform (runtime, database) – shared management
+- **SaaS** – Software (apps) – provider manages most`
+      }
+    ],
+    questions: [
+      {
+        q: "A hard drive from a classified government system must be repurposed for use in an unclassified office. Which method of data sanitization provides the HIGHEST assurance?",
+        options: ["Formatting the drive", "Clearing – overwriting with zeros once", "Purging – degaussing the magnetic media", "Physical destruction of the drive"],
+        answer: 3,
+        explanation: "Physical destruction (shredding, disintegrating) provides the highest assurance that data cannot be recovered — the media no longer exists. Purging (degaussing) is next. Clearing/overwriting may leave recoverable data with advanced forensic tools. Formatting is the weakest — data is easily recoverable."
+      },
+      {
+        q: "Which tool collects and correlates security event logs from multiple systems across an organization to identify suspicious patterns?",
+        options: ["IDS (Intrusion Detection System)", "DLP (Data Loss Prevention)", "SIEM (Security Information and Event Management)", "Vulnerability Scanner"],
+        answer: 2,
+        explanation: "A SIEM collects logs from firewalls, servers, endpoints, and applications, then correlates them to identify attack patterns that individual systems couldn't see alone. It provides centralized visibility, alerting, and compliance reporting. This is the exam's go-to answer for 'centralized log monitoring.'"
+      },
+      {
+        q: "An organization is migrating to a SaaS email solution. Under the cloud shared responsibility model, who is responsible for data security?",
+        options: ["The cloud provider is fully responsible for all security", "The customer is responsible for data security and access management", "Security is split equally 50/50", "The customer is fully responsible for all security"],
+        answer: 1,
+        explanation: "In the shared responsibility model, the SaaS provider secures the infrastructure, application, and underlying platform. The CUSTOMER remains responsible for: their data, user access management, identity (who gets accounts), and data classification. 'Shared' doesn't mean 'equal' — it depends on service type."
+      },
+      {
+        q: "What is the primary difference between a vulnerability scan and a penetration test?",
+        options: ["Scans are manual; pen tests are automated", "Scans identify weaknesses; pen tests actively exploit them", "Pen tests are less intrusive than scans", "Scans require attacker permission; pen tests do not"],
+        answer: 1,
+        explanation: "A vulnerability scan identifies and reports known weaknesses passively/automatically — it doesn't exploit them. A penetration test goes further by actively attempting to exploit vulnerabilities to determine real-world impact. Both require authorization. Pen tests simulate real attacker actions."
+      },
+      {
+        q: "Which hardening step MOST directly reduces the attack surface of a new server?",
+        options: ["Enabling all optional features for flexibility", "Removing unnecessary services and applications", "Installing an antivirus solution", "Documenting the server configuration"],
+        answer: 1,
+        explanation: "Attack surface reduction is achieved by removing everything that's not needed — unnecessary services, ports, applications, and user accounts. Each running service is a potential entry point. Antivirus is a compensating control, not hardening. Documentation is administrative, not a technical control."
+      },
+      {
+        q: "A VM running on a shared host is able to access the hypervisor and interact with other VMs on the same physical server. What type of attack has occurred?",
+        options: ["Side-channel attack", "VM Escape", "Container breakout", "Cross-site scripting"],
+        answer: 1,
+        explanation: "VM Escape is a critical virtualization attack where malicious code running inside a VM breaks out of its isolated environment to interact with the hypervisor or other VMs on the same host. This is why hypervisor security and regular patching of virtualization platforms is critical."
+      },
+      {
+        q: "Why is Network Time Protocol (NTP) synchronization considered a security best practice across an organization's servers and logging infrastructure?",
+        options: ["It encrypts traffic between time servers", "Consistent timestamps are essential for accurately correlating events across multiple log sources during investigations", "It prevents brute-force attacks against authentication systems", "It replaces the need for a SIEM"],
+        answer: 1,
+        explanation: "Without synchronized clocks, log timestamps across firewalls, servers, and applications won't line up, making it extremely difficult to reconstruct the accurate sequence of events during an incident investigation. NTP ensures all systems share a consistent, accurate time reference."
+      },
+      {
+        q: "An organization follows a formal process requiring documented approval, testing, and a rollback plan before any production system change is implemented. What is this process called?",
+        options: ["Patch management", "Change management", "Configuration baseline enforcement", "Vulnerability management"],
+        answer: 1,
+        explanation: "Change management is the formal, documented process for proposing, reviewing, approving, testing, and implementing changes to production systems — including rollback planning — to minimize the risk of unintended outages or security gaps introduced by uncontrolled changes."
+      },
+      {
+        q: "Which of the following BEST describes 'data remanence' and why it matters for security operations?",
+        options: ["The encryption of data while it is being actively processed by an application", "Residual data that may still be recoverable from storage media even after deletion, posing a disclosure risk if media is repurposed or disposed of improperly", "The replication of data across multiple geographic regions for availability", "The classification label applied to highly sensitive data"],
+        answer: 1,
+        explanation: "Data remanence refers to data that physically remains on storage media after a standard delete or format operation, which forensic tools can often recover. This is why proper sanitization (clearing, purging, or destruction) — not simple deletion — is required before media is reused or disposed of."
+      },
+      {
+        q: "A company's security baseline configuration mandates that all servers have unnecessary services disabled, default accounts removed, and the latest security patches applied. What is the PRIMARY purpose of maintaining and enforcing a baseline?",
+        options: ["To increase server processing speed", "To establish a known, secure, and consistent starting configuration that deviations can be measured against", "To eliminate the need for a CMDB", "To replace the need for vulnerability scanning entirely"],
+        answer: 1,
+        explanation: "A security baseline defines the minimum acceptable, hardened configuration for a system type. It serves as a reference point — administrators and tools can detect configuration drift (unauthorized deviations) by comparing current state against this known-good baseline."
+      },
+      {
+        q: "Which type of hypervisor is generally considered to present a LARGER attack surface due to running atop a full general-purpose host operating system?",
+        options: ["Type 1 (bare-metal) hypervisor", "Type 2 (hosted) hypervisor", "Container runtime", "Microkernel hypervisor"],
+        answer: 1,
+        explanation: "A Type 2 (hosted) hypervisor runs as an application on top of a conventional operating system (like Windows or macOS), meaning vulnerabilities in that underlying OS can potentially be leveraged against the hypervisor and its VMs — a larger attack surface than Type 1, which runs directly on hardware."
+      },
+      {
+        q: "An organization wants external security researchers to test their public-facing application for vulnerabilities and receive a monetary reward for valid findings, without conducting a formal contracted engagement. What is this program called?",
+        options: ["Red team exercise", "Bug bounty program", "Blue team exercise", "Tabletop exercise"],
+        answer: 1,
+        explanation: "A bug bounty program invites external researchers (often via a public or private platform) to discover and responsibly report vulnerabilities in exchange for monetary rewards, providing a continuous, crowd-sourced layer of vulnerability discovery outside traditional contracted penetration tests."
+      },
+      {
+        q: "Which statement BEST describes the order of operations in a sound patch management process?",
+        options: ["Deploy patches immediately to all systems, then test afterward to confirm stability", "Identify applicable patches, test them in a non-production environment, then deploy and verify in production", "Patch only after a breach has occurred", "Patches should only be applied to end-user workstations, never to servers"],
+        answer: 1,
+        explanation: "Sound patch management follows: inventory systems → identify applicable patches → test in a controlled/non-production environment → deploy to production → verify successful application. Skipping testing risks destabilizing production systems with an untested patch."
+      },
+      {
+        q: "A company stores sensitive customer data in a cloud-based Platform-as-a-Service (PaaS) offering. Under the shared responsibility model, which security task is generally retained by the CUSTOMER rather than the cloud provider?",
+        options: ["Patching the underlying physical host servers", "Securing the application code and managing the data and access controls within it", "Maintaining the physical data center's power and cooling", "Patching the hypervisor layer"],
+        answer: 1,
+        explanation: "In PaaS, the provider manages the underlying infrastructure, operating system, and runtime platform. The customer remains responsible for the application code they build on the platform, their data, and configuring access controls/identity for users of that application."
+      },
+      {
+        q: "A SIEM generates an alert showing a single user account failed login 200 times in one minute from an IP address never seen before, followed immediately by a successful login. What is the MOST likely interpretation?",
+        options: ["Normal user behavior with a typo-prone password", "A successful brute-force or credential-stuffing attack against that account", "A scheduled vulnerability scan", "A false positive caused by clock drift"],
+        answer: 1,
+        explanation: "A high volume of rapid failed login attempts from an unfamiliar IP, immediately followed by a successful login, is a strong indicator of a successful brute-force or credential-stuffing attack. This pattern should trigger immediate incident response — forcing a password reset and reviewing what the attacker accessed."
+      }
+    ]
+  }
+];
+
+// Extra question bank used to power "Generate New Question" without any external API.
+// Each domain gets a pool of additional exam-style questions; "generate" draws a fresh
+// one (not yet shown this session) so it feels new every time you click.
+const extraQuestionPools = {
+  1: [
+    {
+      question: "A bank requires customers to enter a password AND a one-time code sent to their phone. This is an example of:",
+      options: ["Two-factor identification", "Multi-factor authentication", "Mandatory access control", "Role-based authorization"],
+      answer: 1,
+      explanation: "Using two different factor categories (something you know + something you have) is Multi-Factor Authentication (MFA). 'Two-factor identification' isn't a standard security term — identification is just claiming an identity (e.g., a username)."
+    },
+    {
+      question: "Which risk treatment option is being used when an organization purchases cybersecurity insurance instead of building additional controls?",
+      options: ["Mitigate", "Avoid", "Transfer", "Accept"],
+      answer: 2,
+      explanation: "Transferring risk shifts the financial impact to a third party, most commonly through insurance. The organization still experiences the incident operationally, but the financial loss is absorbed by the insurer."
+    },
+    {
+      question: "A company publishes a document stating 'All employees must change passwords every 90 days.' What type of governance document is this?",
+      options: ["Guideline", "Standard", "Procedure", "Baseline"],
+      answer: 1,
+      explanation: "A standard provides specific, mandatory requirements that support a policy. 'Every 90 days' is a precise mandatory requirement, unlike a guideline (recommended, optional) or a policy (high-level, broad)."
+    },
+    {
+      question: "Which scenario BEST demonstrates a violation of data integrity rather than confidentiality?",
+      options: ["An attacker views payroll records without authorization", "An attacker modifies a financial transaction amount in transit", "An attacker copies a customer database to a USB drive", "An attacker reads encrypted backup tapes"],
+      answer: 1,
+      explanation: "Integrity is about whether data has been altered without authorization. Modifying a transaction amount changes the data itself. Viewing, copying, or reading data (without altering it) are confidentiality concerns."
+    },
+    {
+      question: "Under GDPR, within how many hours must certain data breaches typically be reported to the relevant supervisory authority?",
+      options: ["24 hours", "48 hours", "72 hours", "7 days"],
+      answer: 2,
+      explanation: "GDPR generally requires notification of a qualifying personal data breach to the supervisory authority within 72 hours of becoming aware of it, where feasible."
+    },
+    {
+      question: "An employee in HR can view but not edit payroll records, due to her job function. This permission is most directly an example of:",
+      options: ["DAC", "RBAC", "MAC", "Non-repudiation"],
+      answer: 1,
+      explanation: "Permissions tied to a job function/role describe Role-Based Access Control (RBAC). If the owner of the payroll file personally chose to share it, that would be DAC; clearance labels would indicate MAC."
+    }
+  ],
+  2: [
+    {
+      question: "Which phase of the incident response lifecycle includes updating playbooks and conducting a 'lessons learned' meeting?",
+      options: ["Containment", "Recovery", "Post-Incident Activity", "Detection & Analysis"],
+      answer: 2,
+      explanation: "Post-Incident Activity (sometimes called 'Lessons Learned') happens after recovery and focuses on documenting what happened, what worked, and what should change — including updates to playbooks and policies."
+    },
+    {
+      question: "An organization's MTD (Maximum Tolerable Downtime) for a critical application is 4 hours. Its current DRP can restore the application in 6 hours. What is the implication?",
+      options: ["The DRP exceeds requirements and is acceptable", "The organization is at risk of failure if the outage reaches MTD before recovery completes", "RPO should be extended to match MTD", "No action is needed since RTO was not specified"],
+      answer: 1,
+      explanation: "If actual recovery time (6 hours) exceeds MTD (4 hours), the organization risks serious or irreversible harm before systems are restored. The DRP needs improvement — faster recovery options or a revised RTO target."
+    },
+    {
+      question: "Which backup strategy results in the FASTEST backup window but the SLOWEST full restore?",
+      options: ["Full backup only", "Differential backup", "Incremental backup", "Snapshot backup"],
+      answer: 2,
+      explanation: "Incremental backups only capture changes since the last backup of any kind, making them very fast to create. However, restoring requires applying the last full backup plus every incremental in sequence, making restores the slowest."
+    },
+    {
+      question: "Which type of recovery site has hardware and infrastructure in place, but requires the organization to load current data and configurations before becoming operational?",
+      options: ["Hot site", "Warm site", "Cold site", "Reciprocal site"],
+      answer: 1,
+      explanation: "A warm site has some infrastructure and equipment pre-installed but is not kept continuously synchronized with production data, requiring some setup time before becoming fully operational — a middle ground between hot and cold sites."
+    },
+    {
+      question: "During a security incident, why is it generally discouraged to power off an infected system immediately?",
+      options: ["It violates company IT policy in all cases", "It may destroy volatile evidence in memory needed for forensic analysis", "It will trigger automatic data loss", "Powering off devices is always slower than isolating them"],
+      answer: 1,
+      explanation: "Volatile data in RAM (running processes, network connections, encryption keys) is lost when a system powers off. Investigators often prefer isolating (e.g., disconnecting from network) over powering down, to preserve evidence for forensic analysis and chain of custody."
+    }
+  ],
+  3: [
+    {
+      question: "A company's policy states that file owners can grant or restrict access to their own documents at their discretion. This describes:",
+      options: ["MAC", "DAC", "RBAC", "ABAC"],
+      answer: 1,
+      explanation: "Discretionary Access Control (DAC) allows the resource owner to decide who gets access. This is flexible but can be inconsistent at scale since each owner makes independent decisions."
+    },
+    {
+      question: "Which of the following is the BEST example of 'something you have' as an authentication factor?",
+      options: ["A fingerprint scan", "A PIN code", "A hardware security token", "A security question answer"],
+      answer: 2,
+      explanation: "A hardware token is a physical object the user possesses — 'something you have.' Fingerprints are 'something you are,' while PINs and security questions are 'something you know.'"
+    },
+    {
+      question: "An organization uses a centralized service to authenticate users once and grant access to multiple partner organizations' applications. This is an example of:",
+      options: ["Federation", "Privileged Access Management", "Mandatory Access Control", "Just-in-time provisioning"],
+      answer: 0,
+      explanation: "Federation extends identity and authentication across organizational boundaries using standards like SAML, OAuth, or OpenID Connect, allowing a user authenticated by one organization to access resources at another."
+    },
+    {
+      question: "Which control specifically ensures that a system administrator's elevated session is recorded for later audit and review?",
+      options: ["Least privilege", "Session recording under Privileged Access Management (PAM)", "Federation", "Rule-based access control"],
+      answer: 1,
+      explanation: "PAM solutions often include session recording for privileged accounts (admin/root), creating an auditable record of exactly what actions were taken during an elevated session — important for accountability and incident investigation."
+    },
+    {
+      question: "What is the key distinction between Rule-Based Access Control and Role-Based Access Control (RBAC), both often abbreviated 'RBAC'?",
+      options: ["They are identical and interchangeable", "Rule-based control relies on conditional logic statements (like firewall rules), while role-based control assigns permissions based on job roles", "Rule-based control only applies to physical security", "Role-based control cannot be combined with least privilege"],
+      answer: 1,
+      explanation: "Rule-Based Access Control applies predefined rules/conditions (e.g., 'block traffic from this IP range') regardless of user identity, while Role-Based Access Control ties permissions to a user's assigned role in the organization. The exam tests this naming overlap deliberately."
+    }
+  ],
+  4: [
+    {
+      question: "Which OSI layer is responsible for establishing, maintaining, and terminating sessions between two communicating applications?",
+      options: ["Layer 3 – Network", "Layer 4 – Transport", "Layer 5 – Session", "Layer 6 – Presentation"],
+      answer: 2,
+      explanation: "The Session layer (Layer 5) manages dialog control between devices — opening, maintaining, and closing sessions. Layer 4 (Transport) handles reliable delivery via TCP/UDP, which is a related but distinct function."
+    },
+    {
+      question: "An organization wants to detect attacks that don't match any known signature, such as a brand-new zero-day exploit. Which detection method is BEST suited for this?",
+      options: ["Signature-based detection", "Anomaly/behavior-based detection", "Stateful packet filtering", "Static ACL filtering"],
+      answer: 1,
+      explanation: "Anomaly-based (behavior-based) detection establishes a baseline of normal activity and flags deviations, allowing it to catch novel attacks that have no existing signature — at the cost of more false positives compared to signature-based methods."
+    },
+    {
+      question: "Which protocol is primarily responsible for securely exchanging a symmetric session key between two parties who have never communicated before, without transmitting the key itself?",
+      options: ["AES", "Diffie-Hellman key exchange", "SHA-256", "RC4"],
+      answer: 1,
+      explanation: "Diffie-Hellman is a key exchange protocol that allows two parties to derive a shared secret over an insecure channel without ever transmitting the secret itself, solving the symmetric key distribution problem."
+    },
+    {
+      question: "A victim's browser is redirected to a fraudulent banking site even though they typed the correct URL, because the local DNS cache was corrupted. This is an example of:",
+      options: ["ARP poisoning", "DNS spoofing/poisoning", "Phishing", "Session hijacking"],
+      answer: 1,
+      explanation: "DNS spoofing (poisoning) corrupts DNS resolution so that a legitimate domain name resolves to a malicious IP address, redirecting victims without any obvious sign in the URL bar."
+    },
+    {
+      question: "Which port is associated with SSH, commonly used for secure remote administration?",
+      options: ["Port 21", "Port 22", "Port 23", "Port 443"],
+      answer: 1,
+      explanation: "SSH (Secure Shell) uses port 22 by default, providing encrypted remote login and command execution — the secure replacement for unencrypted Telnet (port 23)."
+    },
+    {
+      question: "A digital certificate has been revoked before its expiration date due to a key compromise. Which mechanism allows a client to check this status in near real time?",
+      options: ["CRL only", "OCSP (Online Certificate Status Protocol)", "DNSSEC", "ARP cache lookup"],
+      answer: 1,
+      explanation: "OCSP allows real-time certificate status checks against the issuing CA, which is faster than downloading and checking a full Certificate Revocation List (CRL). Both serve the same purpose: verifying a certificate hasn't been revoked."
+    }
+  ],
+  5: [
+    {
+      question: "Which term describes residual data that may remain on storage media even after a standard deletion or formatting operation?",
+      options: ["Data remanence", "Data purging", "Data sanitization", "Data degaussing"],
+      answer: 0,
+      explanation: "Data remanence refers to residual representations of data that remain even after attempts to erase or delete it. This is why sensitive media requires proper clearing, purging, or destruction rather than simple deletion."
+    },
+    {
+      question: "A security team wants to monitor and block sensitive files from being uploaded to personal cloud storage from corporate laptops. Which control category addresses this?",
+      options: ["Network DLP", "Endpoint DLP", "SIEM", "CMDB"],
+      answer: 1,
+      explanation: "Endpoint DLP (Data Loss Prevention) operates directly on user devices and can control or block actions like copying files to USB drives, uploading to unauthorized cloud services, or printing sensitive data."
+    },
+    {
+      question: "Which hypervisor type runs directly on physical hardware without a host operating system, and is generally considered more secure for enterprise use?",
+      options: ["Type 1 (bare-metal)", "Type 2 (hosted)", "Container-based", "Nested virtualization"],
+      answer: 0,
+      explanation: "Type 1 hypervisors (e.g., VMware ESXi, Microsoft Hyper-V) run directly on hardware without requiring a host OS, reducing the attack surface compared to Type 2 hypervisors which run atop a general-purpose operating system."
+    },
+    {
+      question: "An organization keeps a centralized database recording every server, its configuration, owner, and relationships to other assets. What is this called?",
+      options: ["SIEM", "CMDB (Configuration Management Database)", "DLP console", "Vulnerability scanner repository"],
+      answer: 1,
+      explanation: "A CMDB (Configuration Management Database) tracks IT assets and their configurations, along with relationships and dependencies between them — essential for change management and impact analysis."
+    },
+    {
+      question: "Under the cloud Infrastructure-as-a-Service (IaaS) model, which security responsibility typically falls to the CUSTOMER rather than the provider?",
+      options: ["Physical security of data centers", "Patching the guest operating system and applications", "Maintaining the physical network hardware", "Securing the hypervisor layer"],
+      answer: 1,
+      explanation: "In IaaS, the provider secures the physical infrastructure, hypervisor, and network hardware, but the customer is responsible for the guest OS, applications, patching, and data running on the virtual machines they control."
+    }
+  ]
+};
+
+// ============== STATE (in-memory only; no localStorage in artifacts) ==============
+let state = {
+  view: "home",            // home | domain | mock
+  activeDomainId: null,
+  activeTopic: 0,
+  quizMode: false,
+  qIndex: 0,
+  selected: null,
+  showExplanation: false,
+  progress: {},             // { "d1_q0": "correct" | "wrong" }
+  mockQuestions: [],
+  mockIndex: 0,
+  mockAnswers: [],
+  mockDone: false,
+  mockSelected: null,
+  mockSecondsLeft: 0,
+  mockTimerId: null,
+  mockTimeUp: false,
+  aiLoading: false,
+  aiQuestion: null,
+  aiSelected: null,
+  aiShowExp: false,
+  aiUsedIndices: {}         // { domainId: Set of used extra-pool indices }
+};
+
+const colors = {
+  header: "#0f172a", accent: "#2563eb", light: "#f8fafc", border: "#e2e8f0",
+  muted: "#64748b", success: "#16a34a", danger: "#dc2626", warning: "#d97706"
+};
+
+function getDomain(id){ return domains.find(d => d.id === id); }
+
+function totalQuestions(){ return domains.reduce((a,d)=>a+d.questions.length,0); }
+function correctCount(){ return Object.values(state.progress).filter(v=>v==="correct").length; }
+function answeredCount(){ return Object.values(state.progress).length; }
+
+function markAnswered(domainId, qIdx, correct){
+  const key = `d${domainId}_q${qIdx}`;
+  state.progress[key] = correct ? "correct" : "wrong";
+}
+
+function escapeHtml(str){
+  return str.replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+}
+
+function renderInlineBold(line){
+  const escaped = escapeHtml(line);
+  return escaped.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+}
+
+// ============== AI-STYLE QUESTION GENERATOR (local, no network) ==============
+function generateAiQuestion(domain){
+  state.aiLoading = true;
+  state.aiQuestion = null;
+  state.aiSelected = null;
+  state.aiShowExp = false;
+  render();
+
+  // Simulate a brief generation delay for a natural feel
+  setTimeout(() => {
+    const pool = extraQuestionPools[domain.id] || [];
+    if (!state.aiUsedIndices[domain.id]) state.aiUsedIndices[domain.id] = new Set();
+    const used = state.aiUsedIndices[domain.id];
+
+    let available = pool.map((_, i) => i).filter(i => !used.has(i));
+    if (available.length === 0) {
+      used.clear();
+      available = pool.map((_, i) => i);
+    }
+
+    if (available.length === 0) {
+      state.aiQuestion = { error: true };
+      state.aiLoading = false;
+      render();
+      return;
+    }
+
+    const pick = available[Math.floor(Math.random() * available.length)];
+    used.add(pick);
+    state.aiQuestion = pool[pick];
+    state.aiLoading = false;
+    render();
+  }, 650);
+}
+
+function formatTime(totalSeconds){
+  const h = Math.floor(totalSeconds / 3600);
+  const m = Math.floor((totalSeconds % 3600) / 60);
+  const s = totalSeconds % 60;
+  const pad = (n) => String(n).padStart(2, "0");
+  return h > 0 ? `${h}:${pad(m)}:${pad(s)}` : `${pad(m)}:${pad(s)}`;
+}
+
+function renderTimerOnly(){
+  const el = document.getElementById("mock-timer");
+  if (el) {
+    el.textContent = "⏱ " + formatTime(state.mockSecondsLeft);
+    el.style.color = state.mockSecondsLeft <= 60 ? "#fca5a5" : "rgba(255,255,255,0.85)";
+  }
+  if (state.mockTimeUp) {
+    render();
+  }
+}
+
+// ============== MOCK EXAM ==============
+function startMock(count){
+  const n = count || 100;
+  const all = [];
+  domains.forEach(d => d.questions.forEach((q, i) => all.push({ ...q, domainId: d.id, qIdx: i, domainTitle: d.title })));
+  const shuffled = all.sort(() => Math.random() - 0.5).slice(0, n);
+  state.mockQuestions = shuffled;
+  state.mockIndex = 0;
+  state.mockAnswers = [];
+  state.mockDone = false;
+  state.mockSelected = null;
+  state.mockTimeUp = false;
+  state.view = "mock";
+
+  // Real exam pace: 100 questions / 120 minutes = ~72 seconds/question
+  state.mockSecondsLeft = Math.round(n * 72);
+  if (state.mockTimerId) clearInterval(state.mockTimerId);
+  state.mockTimerId = setInterval(() => {
+    if (state.view !== "mock" || state.mockDone) {
+      clearInterval(state.mockTimerId);
+      return;
+    }
+    state.mockSecondsLeft -= 1;
+    if (state.mockSecondsLeft <= 0) {
+      state.mockSecondsLeft = 0;
+      state.mockTimeUp = true;
+      state.mockDone = true;
+      clearInterval(state.mockTimerId);
+    }
+    renderTimerOnly();
+  }, 1000);
+
+  render();
+}
+
+// ============== RENDER FUNCTIONS ==============
+function render(){
+  const app = document.getElementById("app");
+  if (state.view === "mock") {
+    app.innerHTML = renderMock();
+  } else if (state.view === "domain" && state.activeDomainId) {
+    app.innerHTML = renderDomain();
+  } else {
+    app.innerHTML = renderHome();
+  }
+  attachHandlers();
+}
+
+function renderHome(){
+  const total = totalQuestions();
+  const correct = correctCount();
+  const answered = answeredCount();
+  const accuracy = answered > 0 ? `${Math.round((correct/answered)*100)}%` : "—";
+
+  const statsHtml = `
+    <div class="stats-grid">
+      <div class="stat-card"><div class="stat-label">Questions Answered</div><div class="stat-value" style="color:${colors.accent}">${answered}/${total}</div></div>
+      <div class="stat-card"><div class="stat-label">Correct Answers</div><div class="stat-value" style="color:${colors.success}">${correct}</div></div>
+      <div class="stat-card"><div class="stat-label">Accuracy</div><div class="stat-value" style="color:${colors.warning}">${accuracy}</div></div>
+    </div>
+  `;
+
+  const domainsHtml = domains.map(d => {
+    const domainAnswered = d.questions.filter((_, i) => state.progress[`d${d.id}_q${i}`]).length;
+    const domainCorrect = d.questions.filter((_, i) => state.progress[`d${d.id}_q${i}`] === "correct").length;
+    const pct = (domainCorrect / d.questions.length) * 100;
+    return `
+      <div class="domain-card" style="background:${d.bg};border-color:${d.color}22" data-action="open-domain" data-id="${d.id}">
+        <span class="domain-icon">${d.icon}</span>
+        <div style="flex:1">
+          <div class="domain-name" style="color:${d.color}">Domain ${d.id}: ${escapeHtml(d.title)}</div>
+          <div class="domain-meta">Exam weight: <strong>${d.weight}</strong> • ${d.topics.length} topics • ${d.questions.length} practice questions</div>
+          ${domainAnswered > 0 ? `
+            <div class="domain-progress-row">
+              <div class="progress-track"><div class="progress-fill" style="background:${d.color};width:${pct}%"></div></div>
+              <span style="font-size:12px;color:${colors.muted}">${domainCorrect}/${d.questions.length}</span>
+            </div>` : ``}
+        </div>
+        <span class="domain-chevron" style="color:${d.color}">›</span>
+      </div>
+    `;
+  }).join("");
+
+  return `
+    <div class="header">
+      <div class="header-title">ISC2 CC Certified in Cybersecurity</div>
+      <div class="header-sub">Comprehensive Study Guide — All 5 Domains</div>
+      <div class="nav">
+        <button class="nav-btn active" data-action="go-home">🏠 Home</button>
+        <button class="nav-btn" data-action="start-mock-full">📝 Full Mock Exam (100 Qs)</button>
+        <button class="nav-btn" data-action="start-mock-quick">⚡ Quick Mock (20 Qs)</button>
+        <button class="nav-btn" data-action="reset-progress">🔄 Reset Progress</button>
+      </div>
+    </div>
+    <div class="content">
+      ${statsHtml}
+      <div class="section-title">📚 Choose a Domain to Study</div>
+      ${domainsHtml}
+      <div class="card tips-card" style="margin-top:20px">
+        <div class="tips-title">💡 CC Exam Tips</div>
+        <div class="tips-body">
+          • The CC exam has <strong>100 questions</strong> in <strong>2 hours</strong> — approximately 72 seconds per question<br>
+          • Passing score is <strong>700/1000</strong> (approximately 70%)<br>
+          • Read all options before selecting — eliminate obvious wrong answers first<br>
+          • "Best" and "FIRST" questions test priority: Containment before Eradication; Protect Life before Property<br>
+          • When cost-benefit appears: calculate ALE reduction vs control cost<br>
+          • ISC2 Code of Ethics questions always prioritize <strong>Society first, then Principals, then Profession</strong>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderDomain(){
+  const d = getDomain(state.activeDomainId);
+  const qs = d.questions;
+
+  if (!state.quizMode) {
+    return renderDomainStudy(d);
+  } else {
+    return renderDomainQuiz(d, qs);
+  }
+}
+
+function renderDomainHeader(d){
+  return `
+    <div class="domain-header" style="background:${d.color}">
+      <div class="domain-header-top">
+        <button class="back-btn" data-action="go-home">← Back</button>
+        <span class="domain-header-icon">${d.icon}</span>
+        <span class="domain-header-title">Domain ${d.id}: ${escapeHtml(d.title)}</span>
+        <span class="domain-header-weight">${d.weight}</span>
+      </div>
+      <div class="toggle-row">
+        <button class="toggle-btn ${!state.quizMode ? "active" : ""}" data-action="set-study-mode">📖 Study Notes</button>
+        <button class="toggle-btn ${state.quizMode ? "active" : ""}" data-action="set-quiz-mode">✏️ Practice Questions</button>
+      </div>
+    </div>
+  `;
+}
+
+function renderDomainStudy(d){
+  const topic = d.topics[state.activeTopic];
+  const tabsHtml = d.topics.map((t, i) => `
+    <button class="topic-tab ${state.activeTopic === i ? "active" : ""}" data-action="set-topic" data-index="${i}">${escapeHtml(t.name)}</button>
+  `).join("");
+
+  const contentLines = topic.content.split("\n").map(line => {
+    if (!line.trim()) return `<div class="content-spacer"></div>`;
+    if (line.startsWith("**") && line.endsWith("**") && line.indexOf("**", 2) === line.length - 2) {
+      return `<div class="content-line-heading">${escapeHtml(line.replace(/\*\*/g,""))}</div>`;
+    }
+    return `<div class="content-line">${renderInlineBold(line)}</div>`;
+  }).join("");
+
+  let aiSection = `
+    <div class="ai-section">
+      <div class="ai-section-title">Generate Practice Question</div>
+      <button class="btn btn-primary" data-action="generate-ai" ${state.aiLoading ? "disabled" : ""}>
+        ${state.aiLoading ? "Generating..." : "🤖 Generate New Question"}
+      </button>
+      ${state.aiLoading ? `<div class="ai-loading-text">Creating a custom exam question for this domain...</div>` : ``}
+  `;
+
+  if (state.aiQuestion && !state.aiQuestion.error) {
+    const aq = state.aiQuestion;
+    const optsHtml = aq.options.map((opt, i) => {
+      let cls = "option-btn";
+      if (state.aiSelected !== null) {
+        if (i === aq.answer) cls += " state-correct";
+        else if (i === state.aiSelected) cls += " state-wrong";
+        else cls += " state-disabled";
+      }
+      return `<button class="${cls}" data-action="ai-select" data-index="${i}" ${state.aiSelected !== null ? "disabled" : ""}>
+        <span class="opt-letter">${String.fromCharCode(65+i)}.</span>${escapeHtml(opt)}
+      </button>`;
+    }).join("");
+
+    aiSection += `
+      <div class="card ai-question-card" style="border-color:${d.color}44">
+        <span class="badge" style="background:${d.color}20;color:${d.color}">AI-Generated Question</span>
+        <div class="ai-question-text">${escapeHtml(aq.question)}</div>
+        ${optsHtml}
+        ${state.aiShowExp ? `<div class="explanation-box"><strong>Explanation:</strong> ${escapeHtml(aq.explanation)}</div>` : ``}
+        ${state.aiSelected !== null ? `<button class="btn btn-outline" style="margin-top:12px;font-size:13px" data-action="generate-ai">Generate Another →</button>` : ``}
+      </div>
+    `;
+  }
+  if (state.aiQuestion && state.aiQuestion.error) {
+    aiSection += `<div class="ai-error-text">Could not generate question. Please try again.</div>`;
+  }
+  aiSection += `</div>`;
+
+  return `
+    ${renderDomainHeader(d)}
+    <div class="content">
+      <div class="topic-tabs">${tabsHtml}</div>
+      <div class="card">
+        <div class="topic-title" style="color:${d.color}">${escapeHtml(topic.name)}</div>
+        ${contentLines}
+      </div>
+      ${aiSection}
+    </div>
+  `;
+}
+
+function renderDomainQuiz(d, qs){
+  const q = qs[state.qIndex];
+  const getOptionState = (i) => {
+    if (state.selected === null) return "default";
+    if (i === q.answer) return "correct";
+    if (i === state.selected) return "wrong";
+    return "disabled";
+  };
+
+  const dotsHtml = qs.map((_, i) => {
+    const key = `d${d.id}_q${i}`;
+    const p = state.progress[key];
+    let cls = "dot";
+    if (p === "correct") cls += " correct";
+    else if (p === "wrong") cls += " wrong";
+    if (i === state.qIndex) cls += " current";
+    return `<button class="${cls}" data-action="goto-q" data-index="${i}"></button>`;
+  }).join("");
+
+  const optsHtml = q.options.map((opt, i) => {
+    let cls = "option-btn";
+    const st = state.selected !== null ? getOptionState(i) : "default";
+    if (st === "correct") cls += " state-correct";
+    else if (st === "wrong") cls += " state-wrong";
+    else if (st === "disabled") cls += " state-disabled";
+    return `<button class="${cls}" data-action="select-answer" data-index="${i}" ${state.selected !== null ? "disabled" : ""}>
+      <span class="opt-letter">${String.fromCharCode(65+i)}.</span>${escapeHtml(opt)}
+    </button>`;
+  }).join("");
+
+  return `
+    ${renderDomainHeader(d)}
+    <div class="content">
+      <div class="quiz-top-row">
+        <div class="quiz-counter">Question ${state.qIndex + 1} of ${qs.length}</div>
+        <div class="dots-row">${dotsHtml}</div>
+      </div>
+      <div class="card">
+        <div class="question-text">${escapeHtml(q.q)}</div>
+        ${optsHtml}
+        ${state.showExplanation ? `<div class="explanation-box"><strong>Explanation:</strong> ${escapeHtml(q.explanation)}</div>` : ``}
+        <div class="quiz-nav-row">
+          <button class="btn btn-ghost" data-action="prev-q" ${state.qIndex === 0 ? "disabled" : ""}>← Previous</button>
+          <button class="btn btn-primary" data-action="next-q" ${state.qIndex === qs.length - 1 ? "disabled" : ""}>Next →</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+function renderMock(){
+  if (state.mockDone) {
+    return renderMockResults();
+  }
+  const mq = state.mockQuestions[state.mockIndex];
+  const optsHtml = mq.options.map((opt, i) => {
+    let cls = "option-btn";
+    if (state.mockSelected !== null) {
+      if (i === mq.answer) cls += " state-correct";
+      else if (i === state.mockSelected) cls += " state-wrong";
+      else cls += " state-disabled";
+    }
+    return `<button class="${cls}" data-action="mock-select" data-index="${i}" ${state.mockSelected !== null ? "disabled" : ""}>
+      <span class="opt-letter">${String.fromCharCode(65+i)}.</span>${escapeHtml(opt)}
+    </button>`;
+  }).join("");
+
+  const isLast = state.mockIndex + 1 >= state.mockQuestions.length;
+
+  return `
+    <div class="header">
+      <div class="domain-header-top" style="margin-bottom:8px">
+        <button class="back-btn" data-action="exit-mock">← Exit Exam</button>
+        <span id="mock-timer" style="font-weight:700;font-size:15px;color:${state.mockSecondsLeft <= 60 ? "#fca5a5" : "rgba(255,255,255,0.85)"};margin-left:auto">⏱ ${formatTime(state.mockSecondsLeft)}</span>
+      </div>
+      <div class="header-title" style="font-size:18px">📝 Mock Exam — ${state.mockQuestions.length} Questions</div>
+      <div class="header-sub" style="margin-bottom:0">Question ${state.mockIndex + 1} of ${state.mockQuestions.length} • ${escapeHtml(mq.domainTitle)}</div>
+    </div>
+    <div class="content">
+      <div class="progress-bar-outer"><div class="progress-bar-inner" style="width:${(state.mockIndex/state.mockQuestions.length)*100}%"></div></div>
+      <div class="card">
+        <div class="question-text" style="font-size:16px">${escapeHtml(mq.q)}</div>
+        ${optsHtml}
+        ${state.mockSelected !== null ? `
+          <div class="explanation-box"><strong>Explanation:</strong> ${escapeHtml(mq.explanation)}</div>
+          <div style="margin-top:16px;text-align:right">
+            <button class="btn btn-primary" data-action="mock-next">${isLast ? "See Results →" : "Next Question →"}</button>
+          </div>
+        ` : ``}
+      </div>
+    </div>
+  `;
+}
+
+function renderMockResults(){
+  const score = state.mockAnswers.filter(a => a.correct).length;
+  const answeredN = state.mockAnswers.length;
+  const pct = Math.round((score / state.mockQuestions.length) * 100);
+  const pass = pct >= 70;
+
+  const reviewHtml = state.mockQuestions.map((q, i) => {
+    const ans = state.mockAnswers[i];
+    const unanswered = ans === undefined;
+    return `
+      <div class="card" style="border-color:${ans && ans.correct ? "#bbf7d0" : "#fecaca"}">
+        <div class="review-row">
+          <span class="badge" style="background:${ans && ans.correct ? colors.success : colors.danger}20;color:${ans && ans.correct ? colors.success : colors.danger}">${unanswered ? "⏱ Not Answered" : (ans.correct ? "✓ Correct" : "✗ Wrong")}</span>
+          <span class="badge" style="background:${colors.muted}20;color:${colors.muted}">${escapeHtml(q.domainTitle)}</span>
+        </div>
+        <div class="review-q">Q${i+1}: ${escapeHtml(q.q)}</div>
+        <div class="review-correct">✓ ${escapeHtml(q.options[q.answer])}</div>
+        ${ans && !ans.correct ? `<div class="review-wrong">✗ You chose: ${escapeHtml(q.options[ans.chosen])}</div>` : ``}
+        <div class="review-explain">${escapeHtml(q.explanation)}</div>
+      </div>
+    `;
+  }).join("");
+
+  return `
+    <div class="header">
+      <div class="header-title" style="font-size:18px">📝 Mock Exam Results</div>
+      <div class="nav" style="margin-top:8px">
+        <button class="nav-btn" data-action="go-home">← Back to Home</button>
+      </div>
+    </div>
+    <div class="content">
+      ${state.mockTimeUp ? `<div class="card" style="background:#fef3c7;border-color:#fde68a;color:#78350f;text-align:center;font-weight:600">⏱ Time's up! Your exam was automatically submitted with ${answeredN} of ${state.mockQuestions.length} questions answered.</div>` : ``}
+      <div class="card result-card" style="border-color:${pass ? colors.success : colors.danger}">
+        <div class="result-emoji">${pass ? "🎉" : "📚"}</div>
+        <div class="result-pct" style="color:${pass ? colors.success : colors.danger}">${pct}%</div>
+        <div class="result-status">${pass ? "PASS" : "NEEDS IMPROVEMENT"}</div>
+        <div class="result-sub">${score} / ${state.mockQuestions.length} correct • Pass threshold: 70%</div>
+        <div class="result-actions">
+          <button class="btn btn-primary" data-action="start-mock">Retake Mock Exam</button>
+          <button class="btn btn-ghost" data-action="go-home">Back to Study</button>
+        </div>
+      </div>
+      <div class="section-title" style="margin-top:8px">Question Review</div>
+      ${reviewHtml}
+    </div>
+  `;
+}
+
+// ============== EVENT HANDLING ==============
+function attachHandlers(){
+  document.querySelectorAll("[data-action]").forEach(el => {
+    el.addEventListener("click", onAction);
+  });
+}
+
+function onAction(e){
+  const el = e.currentTarget;
+  const action = el.dataset.action;
+  const index = el.dataset.index !== undefined ? parseInt(el.dataset.index, 10) : null;
+
+  switch(action){
+    case "go-home":
+      if (state.mockTimerId) { clearInterval(state.mockTimerId); state.mockTimerId = null; }
+      state.view = "home";
+      state.quizMode = false;
+      state.selected = null;
+      state.qIndex = 0;
+      render();
+      break;
+
+    case "exit-mock": {
+      if (confirm("Exit the exam? Your progress on this attempt will be lost.")) {
+        if (state.mockTimerId) { clearInterval(state.mockTimerId); state.mockTimerId = null; }
+        state.view = "home";
+        render();
+      }
+      break;
+    }
+
+    case "start-mock":
+      startMock(state.mockQuestions.length || 100);
+      break;
+
+    case "start-mock-full":
+      startMock(100);
+      break;
+
+    case "start-mock-quick":
+      startMock(20);
+      break;
+
+    case "reset-progress": {
+      const total = Object.keys(state.progress).length;
+      if (total > 0 && confirm("Reset all progress?")) {
+        state.progress = {};
+        render();
+      }
+      break;
+    }
+
+    case "open-domain": {
+      const id = parseInt(el.dataset.id, 10);
+      state.activeDomainId = id;
+      state.view = "domain";
+      state.activeTopic = 0;
+      state.quizMode = false;
+      state.qIndex = 0;
+      state.selected = null;
+      state.showExplanation = false;
+      state.aiQuestion = null;
+      state.aiSelected = null;
+      render();
+      break;
+    }
+
+    case "set-study-mode":
+      state.quizMode = false;
+      state.selected = null;
+      render();
+      break;
+
+    case "set-quiz-mode":
+      state.quizMode = true;
+      state.qIndex = 0;
+      state.selected = null;
+      state.showExplanation = false;
+      render();
+      break;
+
+    case "set-topic":
+      state.activeTopic = index;
+      render();
+      break;
+
+    case "generate-ai": {
+      const d = getDomain(state.activeDomainId);
+      generateAiQuestion(d);
+      break;
+    }
+
+    case "ai-select":
+      if (state.aiSelected === null) {
+        state.aiSelected = index;
+        state.aiShowExp = true;
+        render();
+      }
+      break;
+
+    case "select-answer": {
+      if (state.selected !== null) break;
+      const d = getDomain(state.activeDomainId);
+      const q = d.questions[state.qIndex];
+      state.selected = index;
+      state.showExplanation = true;
+      markAnswered(d.id, state.qIndex, index === q.answer);
+      render();
+      break;
+    }
+
+    case "goto-q":
+      state.qIndex = index;
+      state.selected = null;
+      state.showExplanation = false;
+      render();
+      break;
+
+    case "prev-q":
+      state.qIndex = Math.max(0, state.qIndex - 1);
+      state.selected = null;
+      state.showExplanation = false;
+      render();
+      break;
+
+    case "next-q": {
+      const d = getDomain(state.activeDomainId);
+      state.qIndex = Math.min(d.questions.length - 1, state.qIndex + 1);
+      state.selected = null;
+      state.showExplanation = false;
+      render();
+      break;
+    }
+
+    case "mock-select":
+      if (state.mockSelected === null) {
+        state.mockSelected = index;
+        render();
+      }
+      break;
+
+    case "mock-next": {
+      const mq = state.mockQuestions[state.mockIndex];
+      const correct = state.mockSelected === mq.answer;
+      state.mockAnswers.push({ correct, chosen: state.mockSelected });
+      if (state.mockIndex + 1 >= state.mockQuestions.length) {
+        state.mockDone = true;
+        if (state.mockTimerId) { clearInterval(state.mockTimerId); state.mockTimerId = null; }
+      } else {
+        state.mockIndex += 1;
+        state.mockSelected = null;
+      }
+      render();
+      break;
+    }
+  }
+}
+
+// ============== INIT ==============
+render();
+</script>
+</body>
+</html>
